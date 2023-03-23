@@ -5,6 +5,10 @@
  */
 package compilador;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 
 /**
@@ -16,44 +20,25 @@ public class Compilador {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         
-    boolean flag = true;
-        String doc = "";
+    boolean flag = true; //Bandera para validar archivo introducido y parametros con clase validar
+        String doc = ""; //Nombre del documento
+        System.out.println("Introdusca el nombre del archivo con formato: [NOMBRE].TXT");
         Scanner sc = new Scanner(System.in);
-        doc = sc.next();
+        doc = sc.next(); //Recopilar nombre del documento desde la consola
         System.out.println(doc);
-        
-        
-        
-    }
-    
-    public boolean validarDoc(String nom){
-		String reg = "[A-Za-z. _]*";
-		if(nom.matches(reg)){
-			return true;
-		}else{
-			return false;
-		}
-    }
-    
-    public boolean validarNom(String nom){
-		String reg = "[A-Za-záéíóúÁÉÍÓÚñÑ ]*";
-		if(!contieneNum(nom) && nom.length() < 40 && nom.length() > 3 && nom.matches(reg)){
-			return true;
-		}else{
-			return false;
-		}
-    }
-    
-    public boolean contieneNum(String num){
-		for(int i = 0; i < num.length(); i++){
-			char c = num.charAt(i);
-			if(Character.isDigit(c)){
-				return true;
-			}
-		}
-		return false;
+        Validaciones Validar = new Validaciones(); //Abrir la clase validaciones
+        flag = Validar.validarDoc(doc); //Validar el nombre del archivo con exprecion regular
+        if(flag==false){
+            System.out.println("Introdusca un archivo valido");
+        }else{
+            System.out.println("Buscando archivo...");
+            File file = new File(doc); //Iniciar el archivo
+            FileReader fr = new FileReader(file); //Leer el archivo
+            BufferedReader br = new BufferedReader(fr);
+            
+        }
     }
     
 }
