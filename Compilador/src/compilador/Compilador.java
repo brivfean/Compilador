@@ -60,7 +60,7 @@ public class Compilador {
 
     List<Token> scanTokens() throws FileNotFoundException, IOException{
         //Aquí va el corazón del scanner.
-        int i;
+        int i, j, k=0;
         boolean flag = true; //Bandera para validar archivo introducido y parametros con clase validar
         String doc = "", lect = "", prov ; //Nombre del documento y lectura del documento
         System.out.println("Introdusca el nombre del archivo con formato: [NOMBRE].TXT");
@@ -78,12 +78,36 @@ public class Compilador {
             BufferedReader br = new BufferedReader(fr); //Buffer
             while ((lect = br.readLine()) != null) //Extraccion de texto
             System.out.println(lect);//Imprecion de texto en consola
+            flag = false;
             for(i=0;i<lect.length();i++){
+                
                 prov = String.valueOf(lect.charAt(i));
-                if(Validar.validarVar(prov)==true){
-                    
+                if(Validar.validarNum(prov)){
+                    //Si hay numeros para variables
+                    flag = true;
+                }
+                if(Validar.validarVar(prov)){
+                    //Diferenciar variables de parabras reservadas
+                    k++;
+                    prov = String.valueOf(lect.charAt(i+1));
+                    if(!Validar.validarVar(prov)){
+                        //Si ya no hay letras o numeros
+                        if(flag){
+                            //Es una variable con numero
+                            prov = "";
+                            for(j=0;j<k;j++){
+                                prov = String.valueOf(lect.charAt(i-j)) + prov;
+                            }
+                            tokens.add(new Token(TipoToken.var, "", null, linea));
+                            
+                        }else{
+                            
+                            
+                        }
+                        k=0;
+                    }
                 }else{
-                    
+                    //Otros atributos
                 }
             }
             

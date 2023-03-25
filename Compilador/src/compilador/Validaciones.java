@@ -20,21 +20,23 @@ public class Validaciones {
     }
     
     public boolean validarVar(String nom){
-		String reg = "[A-Z1-9]*";
-		if(!contieneNum(nom) && nom.length() < 40 && nom.length() > 3 && nom.matches(reg)){
+		String reg = "[A-Za-z]*";
+		if( nom.length() < 40 && nom.length() > 3 && nom.matches(reg)){
 			return true;
 		}else{
 			return false;
 		}
     }
     
-    public boolean contieneNum(String num){
-		for(int i = 0; i < num.length(); i++){
-			char c = num.charAt(i);
-			if(Character.isDigit(c)){
-				return true;
-			}
+    public boolean validarNum(String nom){
+		String reg = "[1-9]*";
+		if( nom.length() < 40 && nom.length() > 3 && nom.matches(reg)){
+			return true;
+		}else{
+			return false;
 		}
-		return false;
     }
+    
+    
+		
 }
