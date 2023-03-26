@@ -11,6 +11,40 @@ package compilador;
  */
 public enum TipoToken {
 
-    si,clase,contra,falso,mientras,fun,nulo,o,imprimir,retornar,sup,este,verdad,var,para,EOF
+    si
+    ,clase
+    ,contra
+    ,falso
+    ,mientras
+    ,fun
+    ,nulo
+    ,o
+    ,imprimir
+    ,retornar
+    ,sup
+    ,este
+    ,verdad
+    ,var
+    ,para
+    ,EOF
+    ,cor1
+    ,cor2
+    ,par1
+    ,par2
+    ,punto
+    ,coma
+    ,puntocoma
+    ,menos
+    ,mas
+    ,por
+    ,div
+    ,ex
+    ,dif
+    ,asignar
+    ,igual
+    ,menor
+    ,mayor
+    ,menori
+    ,mayori
     
 }
