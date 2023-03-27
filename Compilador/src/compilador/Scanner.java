@@ -158,6 +158,10 @@ public class Scanner {
                                     prov = String.valueOf(lect.charAt(i));
                                     line++;
                                     tokens.add(new Token(TipoToken.cr, "Char", prov, line));
+                                }else{
+                                    prov = String.valueOf(lect.charAt(i));
+                                    line++;
+                                    tokens.add(new Token(TipoToken.var, "Variable", prov, line));
                                 }
                             }
                             
