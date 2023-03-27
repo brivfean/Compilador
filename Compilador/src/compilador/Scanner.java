@@ -303,5 +303,5 @@ public class Scanner {
         tokens.add(new Token(TipoToken.EOF, "EOF", null, linea));
 
         return tokens;
-}
+    }
 }
