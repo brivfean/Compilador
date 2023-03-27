@@ -20,7 +20,7 @@ public class Validaciones {
     }
     
     public boolean validarVar(String nom){
-		String reg = "[a-zA-Z]*";
+		String reg = "[a-zA-Z0-9]*";
 		if(nom.matches(reg)){
 			return true;
 		}else{

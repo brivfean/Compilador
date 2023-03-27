@@ -49,5 +49,7 @@ public enum TipoToken {
     ,num        //Numero    *
     ,cr         //Char      *
     ,str        //String    *
+    ,comsi      //'         
+    ,comdo      //"         
     
 }

@@ -1,4 +1,3 @@
-HOla
-MUN
-DO
-!!
+if("Hola"==hey){
+	value.ok();
+}
