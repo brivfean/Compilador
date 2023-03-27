@@ -206,17 +206,99 @@ public class Compilador {
                                         tokens.add(new Token(TipoToken.str, prov, prov, line));
                                     }else if((!flag && i==0) || (!flag && i>0 && !String.valueOf(lect.charAt(i-k)).equals("\""))){
                                         tokens.add(new Token(TipoToken.var, prov, prov, line));
-                                    }else{
-                                        flag = false;   
                                     }
-                        }else{
-                            System.out.println("Error");
                         }
                         k=0;
+                        flag = false;
                     }
                 }else{
                     //Otros atributos
+                    
+                    switch(prov){
+                        case "{":
+                            tokens.add(new Token(TipoToken.cor1, prov, prov, line));
+                            flag = true;
+                        break;
+                        case "}":
+                            tokens.add(new Token(TipoToken.cor2, prov, prov, line));
+                            flag = true;
+                        break;
+                        case "(":
+                            tokens.add(new Token(TipoToken.par1, prov, prov, line));
+                            flag = true;
+                        break;
+                        case ")":
+                            tokens.add(new Token(TipoToken.par2, prov, prov, line));
+                            flag = true;
+                        break;
+                        case ".":
+                            tokens.add(new Token(TipoToken.punto, prov, prov, line));
+                            flag = true;
+                        break;
+                        case ",":
+                            tokens.add(new Token(TipoToken.coma, prov, prov, line));
+                            flag = true;
+                        break;
+                        case ";":
+                            tokens.add(new Token(TipoToken.puntocoma, prov, prov, line));
+                            flag = true;
+                        break;
+                        case "-":
+                            tokens.add(new Token(TipoToken.menos, prov, prov, line));
+                            flag = true;
+                        break;
+                        case "+":
+                            tokens.add(new Token(TipoToken.mas, prov, prov, line));
+                            flag = true;
+                        break;
+                        case "*":
+                            tokens.add(new Token(TipoToken.por, prov, prov, line));
+                            flag = true;
+                        break;
+                        case "/":
+                            tokens.add(new Token(TipoToken.div, prov, prov, line));
+                            flag = true;
+                        break;
+                        case "!":
+                            tokens.add(new Token(TipoToken.ex, prov, prov, line));
+                            flag = true;
+                        break;
+                        case "=":
+                            tokens.add(new Token(TipoToken.asignar, prov, prov, line));
+                            flag = true;
+                        break;
+                        case "<":
+                            tokens.add(new Token(TipoToken.menor, prov, prov, line));
+                            flag = true;
+                        break;
+                        case ">":
+                            tokens.add(new Token(TipoToken.mayor, prov, prov, line));
+                            flag = true;
+                        break;
+                    }
+                    if(!flag){
+                        prov = prov + String.valueOf(lect.charAt(i+1));
+                        switch(prov){
+                        case "!=":
+                            tokens.add(new Token(TipoToken.dif, prov, prov, line));
+                            flag = true;
+                        break;
+                        case "==":
+                            tokens.add(new Token(TipoToken.igual, prov, prov, line));
+                            flag = true;
+                        break;
+                        case "<=":
+                            tokens.add(new Token(TipoToken.menori, prov, prov, line));
+                            flag = true;
+                        break;
+                        case ">=":
+                            tokens.add(new Token(TipoToken.mayori, prov, prov, line));
+                            flag = true;
+                        break;
+                        }
+                    }
                     k=0;
+                    flag = false;
                 }
             }
             

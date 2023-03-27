@@ -27,25 +27,25 @@ public enum TipoToken {
     ,var        //Variable  *
     ,para       //for       *
     ,EOF        //EOF       *
-    ,cor1       //{         
-    ,cor2       //}         
-    ,par1       //(         
-    ,par2       //)         
-    ,punto      //.         
-    ,coma       //,         
-    ,puntocoma  //;         
-    ,menos      //-         
-    ,mas        //+         
-    ,por        //*         
-    ,div        ///         
-    ,ex         //!         
-    ,dif        //!=        
-    ,asignar    //=         
-    ,igual      //==        
-    ,menor      //>         
-    ,mayor      //<         
-    ,menori     //<=        
-    ,mayori     //>=        
+    ,cor1       //{         *
+    ,cor2       //}         *
+    ,par1       //(         *
+    ,par2       //)         *
+    ,punto      //.         *
+    ,coma       //,         *
+    ,puntocoma  //;         *
+    ,menos      //-         *
+    ,mas        //+         *
+    ,por        //*         *
+    ,div        ///         *
+    ,ex         //!         *
+    ,dif        //!=        *
+    ,asignar    //=         *
+    ,igual      //==        *
+    ,menor      //<         *
+    ,mayor      //>         *
+    ,menori     //<=        *
+    ,mayori     //>=        *
     ,num        //Numero    *
     ,cr         //Char      *
     ,str        //String    *
