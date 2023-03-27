@@ -71,6 +71,7 @@ public class Compilador {
         palabrasReservadas.put(">", TipoToken.mayor);
         palabrasReservadas.put("<=", TipoToken.menori);
         palabrasReservadas.put(">=", TipoToken.mayori);
+        palabrasReservadas.put("EOF", TipoToken.EOF);
         
         
     }
@@ -81,7 +82,7 @@ public class Compilador {
 
     List<Token> scanTokens() throws FileNotFoundException, IOException{
         //Aquí va el corazón del scanner.
-        int i, j, k=0, line;
+        int i, j, k=0, line, c=0;
         boolean flag = true; //Bandera para validar archivo introducido y parametros con clase validar
         String doc = "", lect = "", prov ; //Nombre del documento y lectura del documento
         System.out.println("Introdusca el nombre del archivo con formato: [NOMBRE].TXT");
@@ -106,6 +107,7 @@ public class Compilador {
                 if(Validar.validarNum(prov)){
                     //Si hay numeros para variables
                     flag = true;
+                    c++;
                 }
                 if(Validar.validarVar(prov)){
                     //Diferenciar variables de parabras reservadas
@@ -113,7 +115,7 @@ public class Compilador {
                     prov = String.valueOf(lect.charAt(i+1));
                     if(!Validar.validarVar(prov)){
                         //Si ya no hay letras o numeros
-                        if(flag){
+                        if(flag && c<k && k!=1){
                             //Es una variable con numero
                             prov = "";
                             for(j=0;j<k;j++){
@@ -122,15 +124,99 @@ public class Compilador {
                             line++;
                             tokens.add(new Token(TipoToken.var, prov, prov, line));
                             
+                        }else if(flag && c==k && k!=1){
+                            prov = "";
+                            for(j=0;j<k;j++){
+                                prov = String.valueOf(lect.charAt(i-j)) + prov;
+                            }
+                            line++;
+                            tokens.add(new Token(TipoToken.num, prov, prov, line));
+                            
+                        }else if(!flag && c<k && k==1){
+                            prov = String.valueOf(lect.charAt(i));
+                            line++;
+                            tokens.add(new Token(TipoToken.cr, prov, prov, line));
+                        }else if(!flag && c<k && k!=1){
+                            prov = "";
+                            for(j=0;j<k;j++){
+                                prov = String.valueOf(lect.charAt(i-j)) + prov;
+                            }
+                            System.out.println(prov);
+                            line++;
+                            switch(prov){
+                                    case "if" :
+                                        tokens.add(new Token(TipoToken.si, prov, prov, line));
+                                        flag = true;
+                                    break;
+                                    case "class" :
+                                        tokens.add(new Token(TipoToken.clase, prov, prov, line));
+                                        flag = true;
+                                    break;
+                                    case "else" :
+                                        tokens.add(new Token(TipoToken.contra, prov, prov, line));
+                                        flag = true;
+                                    break;
+                                    case "false" :
+                                        tokens.add(new Token(TipoToken.falso, prov, prov, line));
+                                        flag = true;
+                                    break;
+                                    case "while" :
+                                        tokens.add(new Token(TipoToken.mientras, prov, prov, line));
+                                        flag = true;
+                                    break;
+                                    case "function" :
+                                        tokens.add(new Token(TipoToken.fun, prov, prov, line));
+                                        flag = true;
+                                    break;
+                                    case "null" :
+                                        tokens.add(new Token(TipoToken.nulo, prov, prov, line));
+                                        flag = true;
+                                    break;
+                                    case "or" :
+                                        tokens.add(new Token(TipoToken.o, prov, prov, line));
+                                        flag = true;
+                                    break;
+                                    case "print" :
+                                        tokens.add(new Token(TipoToken.imprimir, prov, prov, line));
+                                        flag = true;
+                                    break;
+                                    case "return" :
+                                        tokens.add(new Token(TipoToken.retornar, prov, prov, line));
+                                        flag = true;
+                                    break;
+                                    case "super" :
+                                        tokens.add(new Token(TipoToken.sup, prov, prov, line));
+                                        flag = true;
+                                    break;
+                                    case "this" :
+                                        tokens.add(new Token(TipoToken.este, prov, prov, line));
+                                        flag = true;
+                                    break;
+                                    case "true" :
+                                        tokens.add(new Token(TipoToken.verdad, prov, prov, line));
+                                        flag = true;
+                                    break;
+                                    case "for" :
+                                        tokens.add(new Token(TipoToken.para, prov, prov, line));
+                                        flag = true;
+                                    break;
+                                    
+                            }
+                                    if(!flag && i>0 && String.valueOf(lect.charAt(i-k)).equals("\"")){
+                                        tokens.add(new Token(TipoToken.str, prov, prov, line));
+                                    }else if((!flag && i==0) || (!flag && i>0 && !String.valueOf(lect.charAt(i-k)).equals("\""))){
+                                        tokens.add(new Token(TipoToken.var, prov, prov, line));
+                                    }else{
+                                        flag = false;   
+                                    }
                         }else{
-                            
-                            
-                            
+                            System.out.println("Error");
                         }
                         k=0;
                     }
                 }else{
                     //Otros atributos
+                    k=0;
                 }
             }
             
@@ -139,7 +225,7 @@ public class Compilador {
     
         
         
-        tokens.add(new Token(TipoToken.EOF, "", null, linea));
+        tokens.add(new Token(TipoToken.EOF, "EOF", null, linea));
 
         return tokens;
     }
