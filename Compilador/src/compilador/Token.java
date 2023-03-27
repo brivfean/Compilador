@@ -23,6 +23,6 @@ public class Token {
     }
 
     public String toString(){
-        return tipo + " " + lexema + " " + literal;
+        return "<" + tipo + " " + lexema + " " + literal + ">";
     }
 }

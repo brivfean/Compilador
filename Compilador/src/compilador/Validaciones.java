@@ -20,8 +20,8 @@ public class Validaciones {
     }
     
     public boolean validarVar(String nom){
-		String reg = "[A-Za-z]*";
-		if( nom.length() < 40 && nom.length() > 3 && nom.matches(reg)){
+		String reg = "[a-zA-Z]*";
+		if(nom.matches(reg)){
 			return true;
 		}else{
 			return false;
@@ -29,8 +29,8 @@ public class Validaciones {
     }
     
     public boolean validarNum(String nom){
-		String reg = "[1-9]*";
-		if( nom.length() < 40 && nom.length() > 3 && nom.matches(reg)){
+		String reg = "[0-9]*";
+		if(nom.matches(reg)){
 			return true;
 		}else{
 			return false;
