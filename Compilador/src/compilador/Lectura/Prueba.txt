@@ -1,3 +1,10 @@
+class prueba{
 if("Hola"==hey){
-	value.ok();
+	flag = value.ok();/*Esto no se lee*/
+}else{
+	flag = false;
+	if(!(a!=b) & c=='g'){
+		numero = numero + 1908 - 2987 * 3 / 4;
+	}
+}
 }

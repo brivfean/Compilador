@@ -78,7 +78,7 @@ public class Scanner {
     List<Token> scanTokens() throws FileNotFoundException, IOException{
         //Aquí va el corazón del scanner.
         int i, j, k=0, line, c=0;
-        boolean flag = true; //Bandera para validar archivo introducido y parametros con clase validar
+        boolean flag = true, cflag = false; //Bandera para validar archivo introducido y parametros con clase validar
         String doc = "", lect = "", prov , revi = ""; //Nombre del documento y lectura del documento
         System.out.println("Introdusca el nombre del archivo con formato: [NOMBRE].TXT");
         java.util.Scanner sc = new java.util.Scanner(System.in);
@@ -102,11 +102,26 @@ public class Scanner {
             for(i=0;i<lect.length();i++){
                 
                 prov = String.valueOf(lect.charAt(i));
-                
+                if(cflag){
+                    
+                    if(prov.equals("*")){
+                        
+                        if(lect.length()-1>i){
+                            
+                            if(String.valueOf(lect.charAt(i+1)).equals("/")){
+                                cflag = false;
+                                i++;
+                                prov = String.valueOf(lect.charAt(i));
+                                
+                            }
+                        }    
+                    } 
+                 }else{
                 if(Validar.validarNum(prov)){
                     //Si hay numeros para variables
                     flag = true;
                     c++;
+                    System.out.println(prov);
                 }
                 if(Validar.validarVar(prov)){
                     //Diferenciar variables de parabras reservadas
@@ -118,7 +133,7 @@ public class Scanner {
                     }
                     
                     if(!Validar.validarVar(prov)){
-                        System.out.println("VV2");
+                        System.out.println(c + " " + k + " " + String.valueOf(lect.charAt(i)) );
                         //Si ya no hay letras o numeros
                         if(flag && c<k){
                             //Es una variable con numero
@@ -130,8 +145,8 @@ public class Scanner {
                             tokens.add(new Token(TipoToken.var, "Variable", prov, line));
                             
                         }else if(flag && c==k){
-                            prov = "";
-                            for(j=0;j<k;j++){
+                            
+                            for(j=0;j<c;j++){
                                 prov = String.valueOf(lect.charAt(i-j)) + prov;
                             }
                             line++;
@@ -226,6 +241,7 @@ public class Scanner {
                                     }
                         }
                         k=0;
+                        c=0;
                         flag = false;
                     }
                 }else{
@@ -257,6 +273,16 @@ public class Scanner {
                         case ">=":
                             tokens.add(new Token(TipoToken.mayori, ">=", prov, line));
                             flag = true;
+                            i++;
+                        break;
+                        case "/*":
+                            flag = true;
+                            cflag = true;
+                            i++;
+                        break;
+                        case "*/":
+                            flag = true;
+                            cflag = false;
                             i++;
                         break;
                         }
@@ -336,8 +362,11 @@ public class Scanner {
                         }
                     }
                     k=0;
+                    c=0;
                     flag = false;
                 }
+            }
+                //Aqui termina el ciclo
             }
               }
               catch(Exception e) {
