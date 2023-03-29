@@ -87,6 +87,7 @@ public class Scanner {
                 System.out.println("Ingresar txt ingrese otro simbolo");
             esc = sc.next();
             if(esc.equals("1")){
+                System.out.println("Ingrese el codigo sin espacios ni saltos de linea");
                 lect = sc.next();
             }else if(esc.equals("0")){
                 exit(0);

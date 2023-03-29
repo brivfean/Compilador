@@ -53,7 +53,7 @@ public class Compilador {
         BufferedReader reader = new BufferedReader(input);
 
         for(;;){
-            System.out.print(">>> ");
+            System.out.print("Pulse ENTER para comenzar ");
             String linea = reader.readLine();
             if(linea == null) break; // Presionar Ctrl + D
             ejecutar(linea);
