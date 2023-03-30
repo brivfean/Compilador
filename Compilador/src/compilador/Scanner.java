@@ -82,36 +82,19 @@ public class Scanner {
         boolean flag = true, cflag = false; //Bandera para validar archivo introducido y parametros con clase validar
         String doc = "", lect = "", prov , revi = "", esc="3"; //Nombre del documento y lectura del documento
         java.util.Scanner sc = new java.util.Scanner(System.in);
-        System.out.println("Salir ingrese 0");
-        System.out.println("Ingresar codigo desde la consola ingrese 1");
-                System.out.println("Ingresar txt ingrese otro simbolo");
-            esc = sc.next();
-            if(esc.equals("1")){
-                System.out.println("Ingrese el codigo sin espacios ni saltos de linea");
-                lect = sc.next();
-            }else if(esc.equals("0")){
-                exit(0);
-            }else{
-        System.out.println("Introdusca el nombre del archivo con formato: [NOMBRE].TXT");
-        doc = sc.next(); //Recopilar nombre del documento desde la consola
-        System.out.println(doc);
-            }
+        //System.out.println("Salir ingrese 0");
+        //System.out.println("Ingresar codigo desde la consola ingrese 1");
+        //System.out.println("Ingresar txt ingrese otro simbolo");
+            
+        lect = source;
+            
         Validaciones Validar = new Validaciones(); //Abrir la clase validaciones
             
-        flag = Validar.validarDoc(doc); //Validar el nombre del archivo con exprecion regular
         
-        if(flag==false){
-            System.out.println("Introdusca un archivo valido");
-        }else{
+        
             
             try {
-            if(lect.equals("")){  
-                System.out.println("Buscando archivo...");
-                File file = new File("src/Compilador/Lectura/"+doc); //Iniciar el archivo
-                FileReader fr = new FileReader(file); //Leer el archivo
-                BufferedReader br = new BufferedReader(fr); //Buffer
-                while ((revi = br.readLine()) != null){lect = lect + revi;} //Extraccion de texto
-            }
+
             System.out.println(lect);//Imprecion de texto en consola
             flag = false;
             System.out.println("El numero de simbolos es: "+lect.length());
@@ -252,7 +235,9 @@ public class Scanner {
                             }
                             
                                     if(!flag && i>0){
-                                        if(String.valueOf(lect.charAt(i-k)).equals("\"")){
+                                        System.out.println(i + " " + k);
+                                        if(String.valueOf(lect.charAt(k-i)).equals("\"")){
+                                            
                                             tokens.add(new Token(TipoToken.str, "String", prov, line));
                                         }else{
                                             tokens.add(new Token(TipoToken.var, "Variable", prov, line));
@@ -297,6 +282,11 @@ public class Scanner {
                             i++;
                         break;
                         case "/*":
+                            flag = true;
+                            cflag = true;
+                            i++;
+                        break;
+                        case "//":
                             flag = true;
                             cflag = true;
                             i++;
@@ -401,7 +391,7 @@ public class Scanner {
                   System.out.println("Algo sucedio mal");
               }
             
-        }
+        
     
         
         
