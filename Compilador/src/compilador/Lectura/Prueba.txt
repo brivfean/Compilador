@@ -1,1 +1,2 @@
-class.prueba{if("Hola"==hey){flag = value.ok();/*Estono2slee*/}else{flag=false;if(!(a!=b)andc=='g'){numero=numero+1908-2987*3/4;}}}//Aqui termina el codigo
+class.prueba{if("Hola"==hey){flag = value.ok();/*Estono2slee*/}else{flag=false;if(!(a!=b)andc=='g')
+[]{numero=numero+1908-2987*3/4;}}}//Aqui termina el codigo

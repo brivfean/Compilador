@@ -50,6 +50,8 @@ public enum TipoToken {
     ,cr         //Char      *
     ,str        //String    *
     ,comsi      //'         
-    ,comdo      //"         
+    ,comdo      //"       
+    ,lla1       //[
+    ,lla2       //]
     
 }
