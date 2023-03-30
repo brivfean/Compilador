@@ -97,7 +97,7 @@ public class Scanner {
             
             try {
 
-            System.out.println(lect);//Imprecion de texto en consola
+            //System.out.println(lect);//Imprecion de texto en consola
             flag = false;
             
             line = 1;
@@ -245,7 +245,7 @@ public class Scanner {
                                         }else{
                                             tokens.add(new Token(TipoToken.var, "", prov, line));
                                         }
-                                    }else if(!flag && i==0){
+                                    }else if(!flag && i>=0){
                                         tokens.add(new Token(TipoToken.var, "", prov, line));
                                     }
                         }
