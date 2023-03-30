@@ -5,12 +5,8 @@
  */
 package compilador;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import static java.lang.System.exit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,11 +78,9 @@ public class Scanner {
         //Aquí va el corazón del scanner.
         int i, j, k=0, line, c=0;
         boolean flag = true, cflag = false; //Bandera para validar archivo introducido y parametros con clase validar
-        String doc = "", lect = "", prov , revi = "", esc="3"; //Nombre del documento y lectura del documento
-        java.util.Scanner sc = new java.util.Scanner(System.in);
-        //System.out.println("Salir ingrese 0");
-        //System.out.println("Ingresar codigo desde la consola ingrese 1");
-        //System.out.println("Ingresar txt ingrese otro simbolo");
+        String lect = "", prov ; //Nombre del documento y lectura del documento
+        
+        
             
         lect = source;
             
