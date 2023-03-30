@@ -160,11 +160,11 @@ public class Scanner {
                                 if(String.valueOf(lect.charAt(i-k)).equals("'")){
                                     prov = String.valueOf(lect.charAt(i));
                                     line++;
-                                    tokens.add(new Token(TipoToken.cr, "", prov, line));
+                                    tokens.add(new Token(TipoToken.cr, "", "'" + prov + "'", line));
                                 }else{
                                     prov = String.valueOf(lect.charAt(i));
                                     line++;
-                                    tokens.add(new Token(TipoToken.var, "", prov, line));
+                                    tokens.add(new Token(TipoToken.var, "", prov , line));
                                 }
                             }
                             
@@ -241,7 +241,7 @@ public class Scanner {
                                         
                                         if(String.valueOf(lect.charAt(i-k)).equals("\"")){
                                             
-                                            tokens.add(new Token(TipoToken.str, "", prov, line));
+                                            tokens.add(new Token(TipoToken.str, "", "\"" + prov + "\"", line));
                                         }else{
                                             tokens.add(new Token(TipoToken.var, "", prov, line));
                                         }
@@ -375,11 +375,11 @@ public class Scanner {
                             flag = true;
                         break;
                         case "\"":
-                            tokens.add(new Token(TipoToken.comdo, "\"", null, line));
+                            //tokens.add(new Token(TipoToken.comdo, "\"", null, line));
                             flag = true;
                         break;
                         case "'":
-                            tokens.add(new Token(TipoToken.comsi, "'", null, line));
+                            //tokens.add(new Token(TipoToken.comsi, "'", null, line));
                             flag = true;
                         break;
                         
