@@ -46,11 +46,9 @@ public enum TipoToken {
     ,mayor      //>         *
     ,menori     //<=        *
     ,mayori     //>=        *
+    ,ide        //id
     ,num        //Numero    *
-    ,cr         //Char      *
-    ,str        //String    *
-    ,comsi      //'         
-    ,comdo      //"       
+    ,str        //String    *     
     ,lla1       //[
     ,lla2       //]
     

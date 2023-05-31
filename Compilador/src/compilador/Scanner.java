@@ -63,8 +63,6 @@ public class Scanner {
         palabrasReservadas.put(">", TipoToken.mayor);
         palabrasReservadas.put("<=", TipoToken.menori);
         palabrasReservadas.put(">=", TipoToken.mayori);
-        palabrasReservadas.put("\"", TipoToken.comdo);
-        palabrasReservadas.put("'", TipoToken.comsi);
         palabrasReservadas.put("EOF", TipoToken.EOF);
         
         
@@ -77,7 +75,7 @@ public class Scanner {
     List<Token> scanTokens() throws FileNotFoundException, IOException{
         //Aquí va el corazón del scanner.
         int i, j, k=0, line, c=0;
-        boolean flag = true, cflag = false; //Bandera para validar archivo introducido y parametros con clase validar
+        boolean flag = true, cflag = false, pflag = false; //Bandera para validar archivo introducido y parametros con clase validar
         String lect = "", prov ; //Nombre del documento y lectura del documento
         
         
@@ -119,7 +117,15 @@ public class Scanner {
                     c++;
                     
                 }
-                if(Validar.validarVar(prov)){
+                if(pflag){
+                    c++;
+                    pflag = false;
+                }
+                
+                if(String.valueOf(lect.charAt(i)).equals(".")){
+                    pflag = true;
+                }
+                if(Validar.validarVar(prov) || prov.equals('.')){
                     //Diferenciar variables de parabras reservadas
                     k++;
                     
@@ -129,7 +135,11 @@ public class Scanner {
                         prov = String.valueOf(lect.charAt(i+1));
                     }
                     
-                    if(!Validar.validarVar(prov)){
+                    if(prov.equals('.')){
+                        pflag = true;
+                    }
+                    
+                    if(!Validar.validarVar(prov) && !prov.equals('.')){
                         
                         //Si ya no hay letras o numeros
                         if(flag && c<k){
@@ -141,25 +151,35 @@ public class Scanner {
                             line++;
                             tokens.add(new Token(TipoToken.var, "", prov, line));
                             
-                        }else if(flag && c==k){
+                        }else if(flag && c==k && !pflag){
+                            System.out.println(String.valueOf(lect.charAt(i-1))); //Arreglar esto que lo captura en -1
                             
+                            /*if(String.valueOf(lect.charAt(i-1)).equals(".") && c==1 && k==1 && Validar.validarNum(String.valueOf(lect.charAt(i+1)))){
+                                tokens.add(new Token(TipoToken.punto, ".", null, line));
+                            }
+                            else{*/
+                            prov="";
                             for(j=0;j<c;j++){
                                 prov = String.valueOf(lect.charAt(i-j)) + prov;
                             }
                             line++;
                             tokens.add(new Token(TipoToken.num, "", prov, line));
+                            //}
+                        }else if(flag && c==k && pflag){
+                            System.out.println(String.valueOf(lect.charAt(i-1))); //Arreglar esto que lo captura en -1
                             
+                            prov="";
+                            for(j=0;j<c;j++){
+                                prov = String.valueOf(lect.charAt(i-j)) + prov;
+                            }
+                            line++;
+                            tokens.add(new Token(TipoToken.num, "", prov, line));
+                            //}
                         }else if(!flag && k==1){
                             if(i>0){
-                                if(String.valueOf(lect.charAt(i-k)).equals("'")){
-                                    prov = String.valueOf(lect.charAt(i));
-                                    line++;
-                                    tokens.add(new Token(TipoToken.cr, "", "'" + prov + "'", line));
-                                }else{
                                     prov = String.valueOf(lect.charAt(i));
                                     line++;
                                     tokens.add(new Token(TipoToken.var, "", prov , line));
-                                }
                             }
                             
                         }else{
@@ -233,9 +253,9 @@ public class Scanner {
                             
                                     if(!flag && i>k){
                                         
-                                        if(String.valueOf(lect.charAt(i-k)).equals("\"")){
+                                        if(String.valueOf(lect.charAt(i-k)).equals("=")){
                                             
-                                            tokens.add(new Token(TipoToken.str, "", "\"" + prov + "\"", line));
+                                            tokens.add(new Token(TipoToken.str, "", prov , line));
                                         }else{
                                             tokens.add(new Token(TipoToken.var, "", prov, line));
                                         }
