@@ -22,7 +22,29 @@ public class Token {
         this.linea = linea;
     }
 
+    public Token(TipoToken tipo, String lexema, Object literal) {
+        this.tipo = tipo;
+        this.lexema = lexema;
+        this.literal = literal;
+        this.linea = 0;
+    }
+
+    
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Token)) {
+            return false;
+        }
+
+        if(this.tipo == ((Token)o).tipo){
+            return true;
+        }
+
+        return false;
+    }
+
     public String toString(){
-        return "<" + tipo + " " + lexema + " " + literal + ">";
+        return tipo + " " + lexema + " ";
     }
 }

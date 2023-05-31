@@ -69,6 +69,9 @@ public class Compilador {
         for(compilador.Token token : tokens){
             System.out.println(token);
         }
+        
+        Parser parser = new Parser(tokens);
+        parser.parse();
     }
 
     /*
