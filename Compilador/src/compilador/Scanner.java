@@ -27,6 +27,7 @@ public class Scanner {
     private static final Map<String, TipoToken> palabrasReservadas;
     static {
         palabrasReservadas = new HashMap<>();
+        palabrasReservadas.put("program", TipoToken.programa);
         palabrasReservadas.put("class", TipoToken.clase);
         palabrasReservadas.put("else", TipoToken.contra);
         palabrasReservadas.put("false", TipoToken.falso);
@@ -248,6 +249,10 @@ public class Scanner {
                                         tokens.add(new Token(TipoToken.para, "FOR", null, line));
                                         flag = true;
                                     break;
+                                    case "program" :
+                                        tokens.add(new Token(TipoToken.programa, "PROGRAM", null, line));
+                                        flag = true;
+                                    break;
                                     
                             }
                             
@@ -337,11 +342,11 @@ public class Scanner {
                             flag = true;
                         break;
                         case "[":
-                            tokens.add(new Token(TipoToken.lla1, ")", null, line));
+                            tokens.add(new Token(TipoToken.lla1, "[", null, line));
                             flag = true;
                         break;
                         case "]":
-                            tokens.add(new Token(TipoToken.lla2, ")", null, line));
+                            tokens.add(new Token(TipoToken.lla2, "]", null, line));
                             flag = true;
                         break;
                         case ".":

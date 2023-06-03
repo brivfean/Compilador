@@ -51,5 +51,6 @@ public enum TipoToken {
     ,str        //String    *     
     ,lla1       //[
     ,lla2       //]
+    ,programa
     
 }

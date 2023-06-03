@@ -16,47 +16,47 @@ public class Parser {
     private final List<Token> tokens;
 
     
-    
-    private final Token si = new Token(TipoToken.si, "", null);
-    private final Token clase = new Token(TipoToken.clase, "", null);
-    private final Token contra = new Token(TipoToken.contra, "", null);
-    private final Token falso = new Token(TipoToken.falso, "", null);
-    private final Token mientras = new Token(TipoToken.mientras, "", null);
-    private final Token fun = new Token(TipoToken.fun, "", null);
-    private final Token nulo = new Token(TipoToken.nulo, "", null);
-    private final Token o = new Token(TipoToken.o, "", null);
-    private final Token imprimir = new Token(TipoToken.imprimir, "", null);
-    private final Token retornar = new Token(TipoToken.retornar, "", null);
-    private final Token sup = new Token(TipoToken.sup, "", null);
-    private final Token este = new Token(TipoToken.este, "", null);
-    private final Token verdad = new Token(TipoToken.verdad, "", null);
+    private final Token programa = new Token(TipoToken.programa, "PROGRAMA", null);
+    private final Token si = new Token(TipoToken.si, "IF", null);
+    private final Token clase = new Token(TipoToken.clase, "CLASE", null);
+    private final Token contra = new Token(TipoToken.contra, "ELSE", null);
+    private final Token falso = new Token(TipoToken.falso, "FALSE", null);
+    private final Token mientras = new Token(TipoToken.mientras, "WHILE", null);
+    private final Token fun = new Token(TipoToken.fun, "FUNCTION", null);
+    private final Token nulo = new Token(TipoToken.nulo, "NULL", null);
+    private final Token o = new Token(TipoToken.o, "OR", null);
+    private final Token imprimir = new Token(TipoToken.imprimir, "PRINT", null);
+    private final Token retornar = new Token(TipoToken.retornar, "RETURN", null);
+    private final Token sup = new Token(TipoToken.sup, "SUPER", null);
+    private final Token este = new Token(TipoToken.este, "THIS", null);
+    private final Token verdad = new Token(TipoToken.verdad, "TRUE", null);
     private final Token var = new Token(TipoToken.var, "", null);
-    private final Token para = new Token(TipoToken.para, "", null);
+    private final Token para = new Token(TipoToken.para, "FOR", null);
     private final Token EOF = new Token(TipoToken.EOF, "", null);
-    private final Token cor1 = new Token(TipoToken.cor1, "", null);
-    private final Token cor2 = new Token(TipoToken.cor2, "", null);
-    private final Token par1 = new Token(TipoToken.par1, "", null);
-    private final Token par2 = new Token(TipoToken.par2, "", null);
-    private final Token punto = new Token(TipoToken.punto, "", null);
-    private final Token coma = new Token(TipoToken.coma, "", null);
-    private final Token puntocoma = new Token(TipoToken.puntocoma, "", null);
-    private final Token menos = new Token(TipoToken.menos, "", null);
-    private final Token mas = new Token(TipoToken.mas, "", null);
-    private final Token por = new Token(TipoToken.por, "", null);
-    private final Token div = new Token(TipoToken.div, "", null);
-    private final Token ex = new Token(TipoToken.ex, "", null);
-    private final Token dif = new Token(TipoToken.dif, "", null);
-    private final Token asignar = new Token(TipoToken.asignar, "", null);
-    private final Token igual = new Token(TipoToken.igual, "", null);
-    private final Token menor = new Token(TipoToken.menor, "", null);
-    private final Token mayor = new Token(TipoToken.mayor, "", null);
-    private final Token menori = new Token(TipoToken.menori, "", null);
-    private final Token mayori = new Token(TipoToken.mayori, "", null);
+    private final Token cor1 = new Token(TipoToken.cor1, "{", null);
+    private final Token cor2 = new Token(TipoToken.cor2, "}", null);
+    private final Token par1 = new Token(TipoToken.par1, "(", null);
+    private final Token par2 = new Token(TipoToken.par2, ")", null);
+    private final Token punto = new Token(TipoToken.punto, ".", null);
+    private final Token coma = new Token(TipoToken.coma, ",", null);
+    private final Token puntocoma = new Token(TipoToken.puntocoma, ";", null);
+    private final Token menos = new Token(TipoToken.menos, "-", null);
+    private final Token mas = new Token(TipoToken.mas, "+", null);
+    private final Token por = new Token(TipoToken.por, "*", null);
+    private final Token div = new Token(TipoToken.div, "/", null);
+    private final Token ex = new Token(TipoToken.ex, "!", null);
+    private final Token dif = new Token(TipoToken.dif, "!=", null);
+    private final Token asignar = new Token(TipoToken.asignar, "=", null);
+    private final Token igual = new Token(TipoToken.igual, "==", null);
+    private final Token menor = new Token(TipoToken.menor, "<", null);
+    private final Token mayor = new Token(TipoToken.mayor, ">", null);
+    private final Token menori = new Token(TipoToken.menori, "<=", null);
+    private final Token mayori = new Token(TipoToken.mayori, ">=", null);
     private final Token ide = new Token(TipoToken.ide, "", null);
     private final Token num = new Token(TipoToken.num, "", null);
     private final Token str = new Token(TipoToken.str, "", null);
-    private final Token lla1 = new Token(TipoToken.lla1, "", null);
-    private final Token lla2 = new Token(TipoToken.lla2, "", null);
+    private final Token lla1 = new Token(TipoToken.lla1, "[", null);
+    private final Token lla2 = new Token(TipoToken.lla2, "]", null);
 
     private int i = 0;
     private boolean hayErrores = false;
@@ -70,13 +70,13 @@ public class Parser {
     public void parse(){
         i = 0;
         preanalisis = tokens.get(i);
-        Q();
+        PR();
 
-        if(!hayErrores && !preanalisis.equals(finCadena)){
-            System.out.println("Error en la posición " + preanalisis.posicion + ". No se esperaba el token " + preanalisis.tipo);
+        if(!hayErrores && !preanalisis.equals(EOF)){
+            System.out.println("Error en la posición " + preanalisis.linea + ". No se esperaba el token " + preanalisis.tipo);
         }
-        else if(!hayErrores && preanalisis.equals(finCadena)){
-            System.out.println("Consulta válida");
+        else if(!hayErrores && preanalisis.equals(EOF)){
+            System.out.println("Sintaxis válida");
         }
 
         /*if(!preanalisis.equals(finCadena)){
@@ -86,138 +86,156 @@ public class Parser {
         }*/
     }
 
-    void Q(){
-        if(preanalisis.equals(select)){
-            coincidir(select);
-            D();
-            coincidir(from);
-            T();
+    void PR(){
+        if(preanalisis.equals(programa)){
+            coincidir(programa);
+            DECL();
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba la palabra reservada SELECT.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
         }
     }
 
-    void D(){
+    void DECL(){
         if(hayErrores) return;
 
-        if(preanalisis.equals(distinct)){
-            coincidir(distinct);
-            P();
+        if(preanalisis.equals(clase)){
+            CLASS_DECL();
         }
-        else if(preanalisis.equals(asterisco) || preanalisis.equals(identificador)){
-            P();
+        else if(preanalisis.equals(fun)){
+            FUN_DECL();
+        }
+        else if(preanalisis.equals(var)){
+            VAR_DECL();
+        }
+        else if(preanalisis.equals(ex) 
+                || preanalisis.equals(menos) 
+                || preanalisis.equals(verdad) 
+                || preanalisis.equals(falso) 
+                || preanalisis.equals(nulo) 
+                || preanalisis.equals(este) 
+                || preanalisis.equals(num) 
+                || preanalisis.equals(str) 
+                || preanalisis.equals(ide) 
+                || preanalisis.equals(verdad) 
+                || preanalisis.equals(par1) 
+                || preanalisis.equals(sup)){
+            STMT();
+        }
+        else if(preanalisis.equals(EOF)){
+            System.out.println(" ");
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
         }
     }
-
-    void P(){
+    
+    void CLASS_DECL(){
         if(hayErrores) return;
 
-        if(preanalisis.equals(asterisco)){
-            coincidir(asterisco);
-        }
-        else if(preanalisis.equals(identificador)){
-            A();
+        if(preanalisis.equals(clase)){
+            coincidir(clase);
+            coincidir(ide);
+            CLASS_DECL();
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición \" + preanalisis.posicion + \". Se esperaba * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
         }
     }
 
-    void A(){
+    void FUN_DECL(){
         if(hayErrores) return;
 
-        if(preanalisis.equals(identificador)){
-            A2();
-            A1();
+        if(preanalisis.equals(fun)){
+            coincidir(fun);
+            CLASS_DECL();
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
         }
     }
-
-    void A1(){
+    
+    void VAR_DECL(){
         if(hayErrores) return;
 
-        if(preanalisis.equals(coma)){
-            coincidir(coma);
-            A();
-        }
-    }
-
-    void A2(){
-        if(hayErrores) return;
-
-        if(preanalisis.equals(identificador)){
-            coincidir(identificador);
-            A3();
+        if(preanalisis.equals(fun)){
+            coincidir(var);
+            coincidir(ide);
+            CLASS_DECL();
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
         }
     }
-
-    void A3(){
+    
+    void STMT(){
         if(hayErrores) return;
 
-        if(preanalisis.equals(punto)){
-            coincidir(punto);
-            coincidir(identificador);
-        }
-    }
-
-    void T(){
-        if(hayErrores) return;
-
-        if(preanalisis.equals(identificador)){
-            T2();
-            T1();
+        if(preanalisis.equals(ex) 
+                || preanalisis.equals(menos) 
+                || preanalisis.equals(verdad) 
+                || preanalisis.equals(falso) 
+                || preanalisis.equals(nulo) 
+                || preanalisis.equals(este) 
+                || preanalisis.equals(num) 
+                || preanalisis.equals(str) 
+                || preanalisis.equals(ide) 
+                || preanalisis.equals(verdad) 
+                || preanalisis.equals(par1) 
+                || preanalisis.equals(sup)){
+            EXPR_STMT();
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
         }
     }
-
-    void T1(){
+    
+    void EXPR_STMT(){
         if(hayErrores) return;
 
-        if(preanalisis.equals(coma)){
-            coincidir(coma);
-            T();
-        }
-    }
-
-    void T2(){
-        if(hayErrores) return;
-
-        if(preanalisis.equals(identificador)){
-            coincidir(identificador);
-            T3();
+        if(preanalisis.equals(ex)
+                || preanalisis.equals(menos) 
+                || preanalisis.equals(verdad) 
+                || preanalisis.equals(falso) 
+                || preanalisis.equals(nulo) 
+                || preanalisis.equals(este) 
+                || preanalisis.equals(num) 
+                || preanalisis.equals(str) 
+                || preanalisis.equals(ide) 
+                || preanalisis.equals(verdad) 
+                || preanalisis.equals(par1) 
+                || preanalisis.equals(sup)){
+            
+                
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
         }
     }
-
-    void T3(){
+    
+    /*
+    void (){
         if(hayErrores) return;
 
-        if(preanalisis.equals(identificador)){
-            coincidir(identificador);
+        if(preanalisis.equals()) 
+                
+        }
+        else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
         }
     }
-
-
+    */
+    
+    //---------------------------------------------------------------------------------
+    
     void coincidir(Token t){
         if(hayErrores) return;
 
@@ -227,7 +245,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba un  " + t.tipo);
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba un  " + t.tipo);
 
         }
     }
