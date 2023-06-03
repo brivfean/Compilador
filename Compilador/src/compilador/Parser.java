@@ -118,7 +118,6 @@ public class Parser {
                 || preanalisis.equals(num) 
                 || preanalisis.equals(str) 
                 || preanalisis.equals(ide) 
-                || preanalisis.equals(verdad) 
                 || preanalisis.equals(par1) 
                 || preanalisis.equals(sup)){
             STMT();
@@ -138,7 +137,6 @@ public class Parser {
         if(preanalisis.equals(clase)){
             coincidir(clase);
             coincidir(ide);
-            CLASS_DECL();
         }
         else{
             hayErrores = true;
@@ -151,7 +149,6 @@ public class Parser {
 
         if(preanalisis.equals(fun)){
             coincidir(fun);
-            CLASS_DECL();
         }
         else{
             hayErrores = true;
@@ -165,7 +162,6 @@ public class Parser {
         if(preanalisis.equals(fun)){
             coincidir(var);
             coincidir(ide);
-            CLASS_DECL();
         }
         else{
             hayErrores = true;
@@ -185,7 +181,6 @@ public class Parser {
                 || preanalisis.equals(num) 
                 || preanalisis.equals(str) 
                 || preanalisis.equals(ide) 
-                || preanalisis.equals(verdad) 
                 || preanalisis.equals(par1) 
                 || preanalisis.equals(sup)){
             EXPR_STMT();
@@ -208,11 +203,259 @@ public class Parser {
                 || preanalisis.equals(num) 
                 || preanalisis.equals(str) 
                 || preanalisis.equals(ide) 
-                || preanalisis.equals(verdad) 
                 || preanalisis.equals(par1) 
                 || preanalisis.equals(sup)){
-            
-                
+            EXPR();
+        }
+        else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+        }
+    }
+    
+    void EXPR(){
+        if(hayErrores) return;
+
+        if(preanalisis.equals(ex)
+                || preanalisis.equals(menos) 
+                || preanalisis.equals(verdad) 
+                || preanalisis.equals(falso) 
+                || preanalisis.equals(nulo) 
+                || preanalisis.equals(este) 
+                || preanalisis.equals(num) 
+                || preanalisis.equals(str) 
+                || preanalisis.equals(ide) 
+                || preanalisis.equals(par1) 
+                || preanalisis.equals(sup)){
+            ASSI();
+        }
+        else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+        }
+    }
+    
+    void ASSI(){
+        if(hayErrores) return;
+
+        if(preanalisis.equals(ex)
+                || preanalisis.equals(menos) 
+                || preanalisis.equals(verdad) 
+                || preanalisis.equals(falso) 
+                || preanalisis.equals(nulo) 
+                || preanalisis.equals(este) 
+                || preanalisis.equals(num) 
+                || preanalisis.equals(str) 
+                || preanalisis.equals(ide) 
+                || preanalisis.equals(par1) 
+                || preanalisis.equals(sup)){
+            LOGIC_OR();
+        }
+        else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+        }
+    }
+    
+    void LOGIC_OR(){
+        if(hayErrores) return;
+
+        if(preanalisis.equals(ex)
+                || preanalisis.equals(menos) 
+                || preanalisis.equals(verdad) 
+                || preanalisis.equals(falso) 
+                || preanalisis.equals(nulo) 
+                || preanalisis.equals(este) 
+                || preanalisis.equals(num) 
+                || preanalisis.equals(str) 
+                || preanalisis.equals(ide) 
+                || preanalisis.equals(par1) 
+                || preanalisis.equals(sup)){
+            LOGIC_AND();
+        }
+        else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+        }
+    }
+    
+    void LOGIC_AND(){
+        if(hayErrores) return;
+
+        if(preanalisis.equals(ex)
+                || preanalisis.equals(menos) 
+                || preanalisis.equals(verdad) 
+                || preanalisis.equals(falso) 
+                || preanalisis.equals(nulo) 
+                || preanalisis.equals(este) 
+                || preanalisis.equals(num) 
+                || preanalisis.equals(str) 
+                || preanalisis.equals(ide) 
+                || preanalisis.equals(par1) 
+                || preanalisis.equals(sup)){
+            EQUALITY();
+        }
+        else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+        }
+    }
+    
+    void EQUALITY(){
+        if(hayErrores) return;
+
+        if(preanalisis.equals(ex)
+                || preanalisis.equals(menos) 
+                || preanalisis.equals(verdad) 
+                || preanalisis.equals(falso) 
+                || preanalisis.equals(nulo) 
+                || preanalisis.equals(este) 
+                || preanalisis.equals(num) 
+                || preanalisis.equals(str) 
+                || preanalisis.equals(ide) 
+                || preanalisis.equals(par1) 
+                || preanalisis.equals(sup)){
+            COMPARISON();
+        }
+        else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+        }
+    }
+    
+    void COMPARISON(){
+        if(hayErrores) return;
+
+        if(preanalisis.equals(ex)
+                || preanalisis.equals(menos) 
+                || preanalisis.equals(verdad) 
+                || preanalisis.equals(falso) 
+                || preanalisis.equals(nulo) 
+                || preanalisis.equals(este) 
+                || preanalisis.equals(num) 
+                || preanalisis.equals(str) 
+                || preanalisis.equals(ide) 
+                || preanalisis.equals(par1) 
+                || preanalisis.equals(sup)){
+            TERM();
+        }
+        else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+        }
+    }
+    
+    void TERM(){
+        if(hayErrores) return;
+
+        if(preanalisis.equals(ex)
+                || preanalisis.equals(menos) 
+                || preanalisis.equals(verdad) 
+                || preanalisis.equals(falso) 
+                || preanalisis.equals(nulo) 
+                || preanalisis.equals(este) 
+                || preanalisis.equals(num) 
+                || preanalisis.equals(str) 
+                || preanalisis.equals(ide) 
+                || preanalisis.equals(par1) 
+                || preanalisis.equals(sup)){
+            FACTOR();
+        }
+        else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+        }
+    }
+    
+    void FACTOR(){
+        if(hayErrores) return;
+
+        if(preanalisis.equals(ex)
+                || preanalisis.equals(menos) 
+                || preanalisis.equals(verdad) 
+                || preanalisis.equals(falso) 
+                || preanalisis.equals(nulo) 
+                || preanalisis.equals(este) 
+                || preanalisis.equals(num) 
+                || preanalisis.equals(str) 
+                || preanalisis.equals(ide)  
+                || preanalisis.equals(par1) 
+                || preanalisis.equals(sup)){
+            UNARY();
+        }
+        else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+        }
+    }
+    
+    void UNARY(){
+        if(hayErrores) return;
+
+        if(preanalisis.equals(ex)){
+            coincidir(ex);
+            UNARY();
+        }else if(preanalisis.equals(menos)){
+            coincidir(menos);
+            UNARY();
+        }else if(preanalisis.equals(verdad) 
+                || preanalisis.equals(falso) 
+                || preanalisis.equals(nulo) 
+                || preanalisis.equals(este) 
+                || preanalisis.equals(num) 
+                || preanalisis.equals(str) 
+                || preanalisis.equals(ide) 
+                || preanalisis.equals(par1) 
+                || preanalisis.equals(sup)){
+            CALL();
+        }
+        else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+        }
+    }
+    
+    void CALL(){
+        if(hayErrores) return;
+
+        if(preanalisis.equals(verdad) 
+                || preanalisis.equals(falso) 
+                || preanalisis.equals(nulo) 
+                || preanalisis.equals(este) 
+                || preanalisis.equals(num) 
+                || preanalisis.equals(str) 
+                || preanalisis.equals(ide) 
+                || preanalisis.equals(par1) 
+                || preanalisis.equals(sup)){
+            PRIMARY();
+        }
+        else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+        }
+    }
+    
+    void PRIMARY(){
+        if(hayErrores) return;
+
+        if(preanalisis.equals(verdad)){
+            coincidir(verdad);
+        }else if(preanalisis.equals(falso)){
+            coincidir(falso);
+        }else if(preanalisis.equals(nulo)){
+            coincidir(nulo);
+        }else if(preanalisis.equals(este)){
+            coincidir(este);
+        }else if(preanalisis.equals(num)){
+            coincidir(num);
+        }else if(preanalisis.equals(str)){
+            coincidir(str);
+        }else if(preanalisis.equals(ide)){
+            coincidir(ide);
+        }else if(preanalisis.equals(par1)){
+            coincidir(par1);
+        }else if(preanalisis.equals(sup)){
+            coincidir(sup);
         }
         else{
             hayErrores = true;
@@ -224,8 +467,8 @@ public class Parser {
     void (){
         if(hayErrores) return;
 
-        if(preanalisis.equals()) 
-                
+        if(preanalisis.equals()){
+            
         }
         else{
             hayErrores = true;
