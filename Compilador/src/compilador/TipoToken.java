@@ -19,6 +19,7 @@ public enum TipoToken {
     ,fun        //Function  *
     ,nulo       //Null      *
     ,o          //Or        *
+    ,y          //And
     ,imprimir   //Print     *
     ,retornar   //Return    *
     ,sup        //Super     *

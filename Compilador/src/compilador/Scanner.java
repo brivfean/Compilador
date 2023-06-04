@@ -36,6 +36,7 @@ public class Scanner {
         palabrasReservadas.put("if", TipoToken.si);
         palabrasReservadas.put("null", TipoToken.nulo);
         palabrasReservadas.put("or", TipoToken.o);
+        palabrasReservadas.put("and", TipoToken.y);
         palabrasReservadas.put("print", TipoToken.imprimir);
         palabrasReservadas.put("return", TipoToken.retornar);
         palabrasReservadas.put("super", TipoToken.sup);
@@ -223,6 +224,10 @@ public class Scanner {
                                     break;
                                     case "or" :
                                         tokens.add(new Token(TipoToken.o, "OR", null, line));
+                                        flag = true;
+                                    break;
+                                    case "and" :
+                                        tokens.add(new Token(TipoToken.y, "AND", null, line));
                                         flag = true;
                                     break;
                                     case "print" :
