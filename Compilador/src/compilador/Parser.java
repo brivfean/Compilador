@@ -94,7 +94,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada PROGRAM.");
         }
     }
 
@@ -132,7 +132,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba CLASS, FUNCTION, VARIABLE, !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -149,7 +149,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba CLASS.");
         }
     }
     
@@ -187,7 +187,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba FUNCTION.");
         }
     }
     
@@ -203,7 +203,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba ID.");
         }
     }
     
@@ -228,7 +228,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba ID.");
         }
     }
     
@@ -256,7 +256,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba FUNCTION.");
         }
     }
     
@@ -302,7 +302,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba FOR, IF, PRINT, RETURN, WHILE, {, !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -316,7 +316,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba {.");
         }
     }
     
@@ -359,7 +359,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba WHILE.");
         }
     }
     
@@ -373,7 +373,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba RETURN.");
         }
     }
     
@@ -409,7 +409,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba PRINT.");
         }
     }
     
@@ -426,7 +426,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba IF.");
         }
     }
     
@@ -457,7 +457,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba FOR.");
         }
     }
     
@@ -504,7 +504,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba ! o ;.");
         }
     }
     
@@ -530,7 +530,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba VARIABLE, ;, !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -553,7 +553,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -575,7 +575,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -598,7 +598,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -634,7 +634,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -671,7 +671,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -708,7 +708,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -749,7 +749,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -798,7 +798,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -839,7 +839,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -883,7 +883,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -904,7 +904,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -968,7 +968,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
@@ -1035,7 +1035,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
         }
     }
     
