@@ -197,10 +197,52 @@ public class Parser {
         if(preanalisis.equals(ide)){
             coincidir(ide);
             coincidir(par1);
+            PARAMETERS_OPC();
+            coincidir(par2);
+            BLOCK();
         }
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+        }
+    }
+    
+    void PARAMETERS_OPC(){
+        if(hayErrores) return;
+
+        if(preanalisis.equals(ide)){
+            PARAMETERS();
+        }
+        else{
+            //e
+            
+        }
+    }
+    
+    void PARAMETERS(){
+        if(hayErrores) return;
+
+        if(preanalisis.equals(ide)){
+            coincidir(ide);
+            PARAMETERS_2();
+        }
+        else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+        }
+    }
+    
+    void PARAMETERS_2(){
+        if(hayErrores) return;
+
+        if(preanalisis.equals(coma)){
+            coincidir(coma);
+            coincidir(ide);
+            PARAMETERS_2();
+        }
+        else{
+            //e
+            
         }
     }
     
@@ -902,8 +944,8 @@ public class Parser {
             ARGUMENTS();
         }
         else{
-            hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba DISTINCT, * o un identificador.");
+            //e
+            
         }
     }
     
@@ -984,8 +1026,12 @@ public class Parser {
             coincidir(ide);
         }else if(preanalisis.equals(par1)){
             coincidir(par1);
+            EXPR();
+            coincidir(par2);
         }else if(preanalisis.equals(sup)){
             coincidir(sup);
+            coincidir(punto);
+            coincidir(ide);
         }
         else{
             hayErrores = true;
