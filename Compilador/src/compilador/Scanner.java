@@ -44,6 +44,7 @@ public class Scanner {
         palabrasReservadas.put("true", TipoToken.verdad);
         palabrasReservadas.put("var", TipoToken.var); //definir variables
         palabrasReservadas.put("while", TipoToken.mientras);
+        palabrasReservadas.put("id", TipoToken.ide);
         palabrasReservadas.put("{", TipoToken.cor1);
         palabrasReservadas.put("}", TipoToken.cor2);
         palabrasReservadas.put("(", TipoToken.par1);
@@ -256,6 +257,10 @@ public class Scanner {
                                     break;
                                     case "program" :
                                         tokens.add(new Token(TipoToken.programa, "PROGRAM", null, line));
+                                        flag = true;
+                                    break;
+                                    case "id" :
+                                        tokens.add(new Token(TipoToken.ide, "ID", null, line));
                                         flag = true;
                                     break;
                                     

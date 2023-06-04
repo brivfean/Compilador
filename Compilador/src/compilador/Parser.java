@@ -53,7 +53,7 @@ public class Parser {
     private final Token mayor = new Token(TipoToken.mayor, ">", null);
     private final Token menori = new Token(TipoToken.menori, "<=", null);
     private final Token mayori = new Token(TipoToken.mayori, ">=", null);
-    private final Token ide = new Token(TipoToken.ide, "", null);
+    private final Token ide = new Token(TipoToken.ide, "ID", null);
     private final Token num = new Token(TipoToken.num, "", null);
     private final Token str = new Token(TipoToken.str, "", null);
     private final Token lla1 = new Token(TipoToken.lla1, "[", null);
