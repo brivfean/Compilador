@@ -127,12 +127,10 @@ public class Parser {
             STMT();
             DECL();
         }
-        else if(preanalisis.equals(EOF)){
-            System.out.println(" ");
-        }
+        
         else{
-            hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba CLASS, FUNCTION, VARIABLE, !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER.");
+            //e
+            
         }
     }
     
