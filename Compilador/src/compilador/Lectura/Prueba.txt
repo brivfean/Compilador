@@ -1,2 +1,57 @@
-program class id{id("Hola"==hey){flag = value.ok();/*Estono2slee*/}else{flag=false;if(!(a!=b)andc=='g')
-[]{numero=numero+190.8-2987*3/4;}}}//Aqui termina el codigo
+
+var a;
+var b=0;
+
+
+if(a<123){
+    print a;
+}
+
+for(var i=0; ;){
+    print i;
+
+    if (i>100){
+        return;
+    }
+}
+
+fun sumar(variable1, variable2){
+    return variabl1 + variable2;
+}
+
+class Perro < Animal {
+    ladrar(){
+        print "Guauuu";
+    }
+
+    comer(){
+        while(tanque < 100){
+            tanque = tanque + 1;
+        }
+    }
+}
+
+fun crearPerro(){
+    perro = Perro();
+    perror.ladrar();
+}
+
+crearPerro();
+
+var nombre = "Holamundo";
+fun presentarse(){
+    print nombre;
+}
+
+/*
+Código para calcula la serie de Fibonacci
+*/
+var fib = 0;
+var lim = 10;
+var aux = 1;
+
+for(var init = 1; init <= lim; init = init + 1){
+    print fib;
+    aux = aux + fib;
+    fib = aux - fib;
+}

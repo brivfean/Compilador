@@ -152,7 +152,7 @@ public class Scanner {
                                 prov = String.valueOf(lect.charAt(i-j)) + prov;
                             }
                             line++;
-                            tokens.add(new Token(TipoToken.var, "", prov, line));
+                            tokens.add(new Token(TipoToken.ide, "", prov, line));
                             
                         }else if(flag && c==k && !pflag){
                             System.out.println(String.valueOf(lect.charAt(i-1))); //Arreglar esto que lo captura en -1
@@ -178,11 +178,11 @@ public class Scanner {
                             line++;
                             tokens.add(new Token(TipoToken.num, "", prov, line));
                             //}
-                        }else if(!flag && k==1){
+                        }else if(!flag && k==1 && !String.valueOf(lect.charAt(i-k)).equals("(") ){
                             if(i>0){
                                     prov = String.valueOf(lect.charAt(i));
                                     line++;
-                                    tokens.add(new Token(TipoToken.var, "", prov , line));
+                                    tokens.add(new Token(TipoToken.ide, "", prov , line));
                             }
                             
                         }else{
@@ -215,8 +215,8 @@ public class Scanner {
                                         tokens.add(new Token(TipoToken.mientras, "WHILE", null, line));
                                         flag = true;
                                     break;
-                                    case "function" :
-                                        tokens.add(new Token(TipoToken.fun, "FUNCTION", null, line));
+                                    case "fun" :
+                                        tokens.add(new Token(TipoToken.fun, "FUN", null, line));
                                         flag = true;
                                     break;
                                     case "null" :
@@ -259,8 +259,8 @@ public class Scanner {
                                         tokens.add(new Token(TipoToken.programa, "PROGRAM", null, line));
                                         flag = true;
                                     break;
-                                    case "id" :
-                                        tokens.add(new Token(TipoToken.ide, "ID", null, line));
+                                    case "var" :
+                                        tokens.add(new Token(TipoToken.var, "VAR", null, line));
                                         flag = true;
                                     break;
                                     
@@ -269,13 +269,12 @@ public class Scanner {
                                     if(!flag && i>k){
                                         
                                         if(String.valueOf(lect.charAt(i-k)).equals("=")){
-                                            
                                             tokens.add(new Token(TipoToken.str, "", prov , line));
                                         }else{
-                                            tokens.add(new Token(TipoToken.var, "", prov, line));
+                                            tokens.add(new Token(TipoToken.ide, "", prov, line));
                                         }
                                     }else if(!flag && i>=0){
-                                        tokens.add(new Token(TipoToken.var, "", prov, line));
+                                        tokens.add(new Token(TipoToken.ide, "", prov, line));
                                     }
                         }
                         
