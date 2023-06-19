@@ -29,7 +29,9 @@ public class Token {
         this.linea = 0;
     }
 
-    
+    public String toString(){
+        return tipo + " " + lexema + " " + (literal == null ? " " : literal.toString());
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -44,7 +46,91 @@ public class Token {
         return false;
     }
 
-    public String toString(){
+    /*public String toString(){
         return tipo + " " + lexema + " ";
+    }*/
+    
+    // Métodos auxiliares
+    public boolean esOperando(){
+        switch (this.tipo){
+            case ide:
+            case num:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public boolean esOperador(){
+        switch (this.tipo){
+            case mas:
+            case menos:
+            case por:
+            case div:
+            case igual:
+            case mayor:
+            case mayori:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public boolean esPalabraReservada(){
+        switch (this.tipo){
+            case var:
+            case si:
+            case imprimir:
+            case contra:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public boolean esEstructuraDeControl(){
+        switch (this.tipo){
+            case si:
+            case contra:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public boolean precedenciaMayorIgual(Token t){
+        return this.obtenerPrecedencia() >= t.obtenerPrecedencia();
+    }
+
+    private int obtenerPrecedencia(){
+        switch (this.tipo){
+            case por:
+            case div:
+                return 3;
+            case mas:
+            case menos:
+                return 2;
+            case igual:
+                return 1;
+            case mayor:
+            case mayori:
+                return 1;
+        }
+
+        return 0;
+    }
+
+    public int aridad(){
+        switch (this.tipo) {
+            case por:
+            case div:
+            case mas:
+            case menos:
+            case igual:
+            case mayor:
+            case mayori:
+                return 2;
+        }
+        return 0;
     }
 }
