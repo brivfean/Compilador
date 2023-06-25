@@ -152,7 +152,7 @@ public class Scanner {
                                 prov = String.valueOf(lect.charAt(i-j)) + prov;
                             }
                             line++;
-                            tokens.add(new Token(TipoToken.ide, "", prov, line));
+                            tokens.add(new Token(TipoToken.ide, "IDE", prov, line));
                             
                         }else if(flag && c==k && !pflag){
                             System.out.println(String.valueOf(lect.charAt(i-1))); //Arreglar esto que lo captura en -1
@@ -166,7 +166,7 @@ public class Scanner {
                                 prov = String.valueOf(lect.charAt(i-j)) + prov;
                             }
                             line++;
-                            tokens.add(new Token(TipoToken.num, "", prov, line));
+                            tokens.add(new Token(TipoToken.num, "NUM", prov, line));
                             //}
                         }else if(flag && c==k && pflag){
                             System.out.println(String.valueOf(lect.charAt(i-1))); //Arreglar esto que lo captura en -1
@@ -176,13 +176,13 @@ public class Scanner {
                                 prov = String.valueOf(lect.charAt(i-j)) + prov;
                             }
                             line++;
-                            tokens.add(new Token(TipoToken.num, "", prov, line));
+                            tokens.add(new Token(TipoToken.num, "NUM", prov, line));
                             //}
                         }else if(!flag && k==1 && !String.valueOf(lect.charAt(i-k)).equals("(") ){
                             if(i>0){
                                     prov = String.valueOf(lect.charAt(i));
                                     line++;
-                                    tokens.add(new Token(TipoToken.ide, "", prov , line));
+                                    tokens.add(new Token(TipoToken.ide, "NUM", prov , line));
                             }
                             
                         }else{
@@ -269,12 +269,12 @@ public class Scanner {
                                     if(!flag && i>k){
                                         
                                         if(String.valueOf(lect.charAt(i-k)).equals("=")){
-                                            tokens.add(new Token(TipoToken.str, "", prov , line));
+                                            tokens.add(new Token(TipoToken.str, "STR", prov , line));
                                         }else{
-                                            tokens.add(new Token(TipoToken.ide, "", prov, line));
+                                            tokens.add(new Token(TipoToken.ide, "IDE", prov, line));
                                         }
                                     }else if(!flag && i>=0){
-                                        tokens.add(new Token(TipoToken.ide, "", prov, line));
+                                        tokens.add(new Token(TipoToken.ide, "IDE", prov, line));
                                     }
                         }
                         
@@ -428,7 +428,7 @@ public class Scanner {
             }
               }
               catch(Exception e) {
-                  System.out.println("Algo sucedio mal");
+                  throw new RuntimeException("Error lexico");
               }
             
         

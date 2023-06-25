@@ -72,6 +72,33 @@ public class Compilador {
         
         Parser parser = new Parser(tokens);
         parser.parse();
+        
+        
+        GeneradorPostfija gpf = new GeneradorPostfija(tokens);
+        List<Token> postfija = gpf.convertir();
+        
+        TablaSimbolos ts = new TablaSimbolos();
+        
+        System.out.println("---------------------------------------");
+        for(Token token : postfija){
+            System.out.println(token);
+            /*try{
+                if(token.tipo.equals(t.id) && token.literal == null){
+                ts.existeIdentificador(token.literal.toString());
+                ts.obtener(token.literal.toString());
+                ts.asignar(token.literal.toString(), token.literal);
+                }
+            }catch(Exception e){
+                System.out.println("..");
+            }*/
+            
+            
+        }
+        System.out.println("---------------------------------------");
+        
+        GeneradorAST gast = new GeneradorAST(postfija);
+        Arbol programa = gast.generarAST();
+        programa.recorrer();
     }
 
     /*

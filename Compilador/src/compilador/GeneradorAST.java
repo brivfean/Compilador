@@ -16,7 +16,13 @@ public class GeneradorAST {
 
     private final List<Token> postfija;
     private final Stack<Nodo> pila;
-
+    private boolean vflag = false, rflag = false, iflag = false, oflag = false, aflag = false;
+    private String iden;
+    private Object val;
+    private int idv = 0;
+    
+    TablaSimbolos ts = new TablaSimbolos();
+    
     public GeneradorAST(List<Token> postfija){
         this.postfija = postfija;
         this.pila = new Stack<>();
@@ -42,12 +48,38 @@ public class GeneradorAST {
 
                 pilaPadres.push(n);
                 padre = n;
+                
+                vflag = true;
 
             }
             else if(t.esOperando()){
                 Nodo n = new Nodo(t);
-                pila.push(n);
+                idv++;
+                if(!vflag)
+                {
+                    padre = pilaPadres.peek();
+                    padre.insertarSiguienteHijo(n);
+
+                    pilaPadres.push(n);
+                    padre = n;
+                    System.out.println("Entro");
+                    if(ts.existeIdentificador(t.lexema)){
+                        throw new RuntimeException("Redefinicion de variable '" + t.lexema + "'.");
+                    }
+                    vflag = true;
+                }else{
+                    if(ts.existeIdentificador(t.lexema)){
+                        throw new RuntimeException("Redefinicion de variable '" + t.lexema + "'.");
+                    }
+                    if(idv==1){
+                        iden = t.literal.toString();
+                    }
+                    pila.push(n);
+                    System.out.println("Paso");
+                }
+                
             }
+            
             else if(t.esOperador()){
                 int aridad = t.aridad();
                 Nodo n = new Nodo(t);
@@ -59,6 +91,9 @@ public class GeneradorAST {
             }
             else if(t.tipo == TipoToken.puntocoma){
 
+                vflag = false;
+                idv = 0;
+                
                 if (pila.isEmpty()){
                     /*
                     Si la pila esta vacía es porque t es un punto y coma
@@ -70,17 +105,33 @@ public class GeneradorAST {
                 else{
                     Nodo n = pila.pop();
 
-                    if(padre.getValue().tipo == TipoToken.var){
+                    if(padre.getValue().tipo == TipoToken.var){ //-----------------------------------------------
                         /*
                         En el caso del VAR, es necesario eliminar el igual que
                         pudiera aparecer en la raíz del nodo n.
                          */
                         if(n.getValue().tipo == TipoToken.igual){
                             padre.insertarHijos(n.getHijos());
+                            
+                            SolverAritmetico sa = new SolverAritmetico(n);
+                        
+                            val = sa.resolver();
+                            
                         }
                         else{
                             padre.insertarSiguienteHijo(n);
+                            
+                            val = null;
                         }
+                        
+                        
+                        
+                        
+                        System.out.println(iden + " " + val);
+                        
+                        ts.asignar(iden, val);
+                        //ts.obtener(iden);
+                        
                         pilaPadres.pop();
                         padre = pilaPadres.peek();
                     }
@@ -97,7 +148,7 @@ public class GeneradorAST {
         }
 
         // Suponiendo que en la pila sólamente queda un nodo
-        // Nodo nodoAux = pila.pop();
+        //Nodo nodoAux = pila.pop();
         Arbol programa = new Arbol(raiz);
 
         return programa;

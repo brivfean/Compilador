@@ -28,11 +28,7 @@ public class TablaSimbolos {
     }
 
     void asignar(String identificador, Object valor){
-        if (values.containsKey(identificador)) {
-            values.put(identificador, valor);
-            return;
-        }
-        throw new RuntimeException("Variable no definida '" + identificador + "'.");
+        values.put(identificador, valor);
     }
 
 
