@@ -32,11 +32,21 @@ public class TablaSimbolos {
         values.put(identificador, valor);
     }
     
+    
+    void reasignar(String identificador, Object valor, Object nvalor){
+        values.replace(identificador, valor, nvalor);
+    }
+    
     void p(){
         System.out.println(values);
     }
     
     public Map<String, Object> trasladar() {
+         return values;
+    }
+    
+    public Map<String, Object> incorporar(Map<String, Object> valor) {
+         values.putAll(valor);
          return values;
     }
 

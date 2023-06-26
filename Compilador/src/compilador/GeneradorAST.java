@@ -19,11 +19,12 @@ public class GeneradorAST {
     private final Stack<Nodo> pila;
     private boolean vflag = false, rflag = false, iflag = false, oflag = false, aflag = false;
     private String iden;
-    private Object val = null;
+    private Object val = null, oval = null;
     private int idv = 0;
     
     TablaSimbolos ts = new TablaSimbolos();
     //Map<String, Object> valores;
+    
     
     public Object ManTS(Object aid){
         if(!ts.existeIdentificador(aid.toString())){
@@ -33,13 +34,15 @@ public class GeneradorAST {
         return aid;
     }
     
-    public GeneradorAST(List<Token> postfija/*, Map<String, Object> valores*/){
+    public GeneradorAST(List<Token> postfija, Map<String, Object> valores){
         this.postfija = postfija;
         this.pila = new Stack<>();
+        ts.incorporar(valores);
         //this.valores = valores;
     }
 
     public Arbol generarAST() {
+        
         Stack<Nodo> pilaPadres = new Stack<>();
         Nodo raiz = new Nodo(null);
         pilaPadres.push(raiz);
@@ -120,7 +123,6 @@ public class GeneradorAST {
                 }
                 else{
                     Nodo n = pila.pop();
-
                     if(padre.getValue().tipo == TipoToken.var){ //-----------------------------------------------
                         
                         /*if(n.getValue().tipo == TipoToken.asignar){
@@ -133,12 +135,13 @@ public class GeneradorAST {
                             
                             if(idv>2){
                                 padre.insertarHijos(n.getHijos());
-                                System.out.println("++++++++++++++++++++++++++++++++++++");
-                                System.out.println(padre);
+                                //System.out.println("++++++++++++++++++++++++++++++++++++");
+                                //System.out.println(padre);
+                                
                                 SolverAritmetico sa = new SolverAritmetico(n, ts.trasladar());
-                                System.out.println(val + "      -----------------------");
+                                //System.out.println(val + "      -----------------------");
                                 val = sa.resolver();
-                                System.out.println(val);
+                                //System.out.println(val);
                                 ts.asignar(iden, val);
                             }else if(idv == 1){
                                 padre.insertarSiguienteHijo(n);
@@ -161,8 +164,8 @@ public class GeneradorAST {
                             }
                             
                         //}
-                        ts.p();
-                        System.out.println(iden + " -> " + val);
+                        //ts.p();
+                        //System.out.println(iden + " -> " + val);
                         
                         val = null;
                         
@@ -170,6 +173,53 @@ public class GeneradorAST {
                         padre = pilaPadres.peek();
                     }else if(padre.getValue().tipo == TipoToken.imprimir){
                         padre.insertarSiguienteHijo(n);
+                        System.out.println(ts.obtener(n.getValue().literal.toString()));
+                        pilaPadres.pop();
+                        padre = pilaPadres.peek();
+                    }else if(padre.getValue().tipo == TipoToken.ide){
+                        //Para asignacion sin var
+                        System.out.println(padre.getValue().literal + " -> " + val);
+                        if(idv>2){
+                                padre.insertarHijos(n.getHijos());
+                                //System.out.println("++++++++++++++++++++++++++++++++++++");
+                                //System.out.println(padre);
+                                
+                                SolverAritmetico sa = new SolverAritmetico(n, ts.trasladar());
+                                //System.out.println(val + "      -----------------------");
+                                val = sa.resolver();
+                                //System.out.println(val);
+                                oval = ts.obtener(padre.getValue().literal.toString());
+                                ts.reasignar(padre.getValue().literal.toString(), oval ,val);
+                            }else if(idv == 1){
+                                padre.insertarSiguienteHijo(n);
+                                val = null;
+                                oval = ts.obtener(padre.getValue().literal.toString());
+                                ts.reasignar(padre.getValue().literal.toString(), oval ,val);
+                            }else{
+                                padre.insertarSiguienteHijo(n);
+                                if(n.getValue().tipo == TipoToken.ide){
+                                    if(ts.existeIdentificador(t.lexema)){
+                                        throw new RuntimeException("Redefinicion de variable '" + t.lexema + "'.");
+                                    }else{
+                                        val = ts.obtener(n.getValue().literal.toString());
+                                        oval = ts.obtener(padre.getValue().literal.toString());
+                                        ts.reasignar(padre.getValue().literal.toString(), oval ,val);
+                                    }
+                                }else{
+                                    val = n.getValue().literal;
+                                    oval = ts.obtener(padre.getValue().literal.toString());
+                                    ts.reasignar(padre.getValue().literal.toString(), oval ,val);
+                                }
+                                
+                            }
+                            
+                        //}
+                        //ts.p();
+                        System.out.println(padre.getValue().literal.toString() + " -> " + val);
+                        ts.p();
+                        
+                        val = null;
+                        oval = null;
                         pilaPadres.pop();
                         padre = pilaPadres.peek();
                     }
@@ -184,7 +234,13 @@ public class GeneradorAST {
         // Suponiendo que en la pila sólamente queda un nodo
         //Nodo nodoAux = pila.pop();
         Arbol programa = new Arbol(raiz);
-
+        
         return programa;
     }
+    
+    public Map obtval(){
+        Map valores = ts.trasladar();
+        return valores;
+    }
+    
 }

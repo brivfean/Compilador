@@ -77,7 +77,7 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". No se esperaba el token " + preanalisis.tipo);
         }
         else if(!hayErrores && preanalisis.equals(EOF)){
-            System.out.println("Sintaxis válida");
+            //System.out.println("Sintaxis válida");
         }
 
         

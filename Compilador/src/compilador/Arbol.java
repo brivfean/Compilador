@@ -34,7 +34,7 @@ public class Arbol {
                 case menos:
                 case por:
                 case div:
-                    SolverAritmetico solver = new SolverAritmetico(n, ts.trasladar());
+                    SolverAritmetico solver = new SolverAritmetico( n, ts.trasladar());
                     Object res = solver.resolver();
                     System.out.println(res);
                 break;

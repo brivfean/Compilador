@@ -1,12 +1,14 @@
 
 var a = 1;
-var hola = 2;
-a = a+2;
+var h = 2;
+a = a-2;
 var b = a / 10;
-var n = hola;
-var s = adios;
-var g = s + n;
+var n = "hola";
+var s = "adios";
+var g = n + s;
+/*g = s + n;*/
 print(b);
+print(g);
 
 
 /*
@@ -60,4 +62,7 @@ for(var init = 1; init <= lim; init = init + 1){
     aux = aux + fib;
     fib = aux - fib;
 }
+
+D:\Repositorios\Compilador\Compilador\src\compilador\Lectura\Prueba.txt
+
 */

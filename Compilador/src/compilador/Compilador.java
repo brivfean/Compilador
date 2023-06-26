@@ -43,7 +43,7 @@ public class Compilador {
         
     private static void ejecutarArchivo(String path) throws IOException {
         byte[] bytes = Files.readAllBytes(Paths.get(path));
-        ejecutar(new String(bytes, Charset.defaultCharset()));
+        ejecutar(new String(bytes, Charset.defaultCharset()), null);
 
         // Se indica que existe un error
         if(existenErrores) System.exit(65);
@@ -52,23 +52,27 @@ public class Compilador {
     private static void ejecutarPrompt() throws IOException{
         InputStreamReader input = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(input);
-
+        
+        TablaSimbolos ts = new TablaSimbolos(); 
+        
+        Map<String, Object> valores =ts.trasladar();
+        
         for(;;){
             System.out.print(">>>");
             String linea = reader.readLine();
             if(linea == null) break; // Presionar Ctrl + D
-            ejecutar(linea);
+            ejecutar(linea, valores);
             existenErrores = false;
         }
     }
 
-    private static void ejecutar(String source) throws IOException{
+    private static void ejecutar(String source, Map<String, Object> valores) throws IOException{
         Scanner scanner = new Scanner(source);
         
         List<compilador.Token> tokens = scanner.scanTokens();
 
         for(compilador.Token token : tokens){
-            System.out.println(token);
+            //System.out.println(token);
         }
         
         Parser parser = new Parser(tokens);
@@ -80,11 +84,11 @@ public class Compilador {
         
         TablaSimbolos ts = new TablaSimbolos();
         
-        Map<String, Object> valores =ts.trasladar();
+        valores =ts.trasladar();
         
-        System.out.println("---------------------------------------");
+        //System.out.println("---------------------------------------");
         for(Token token : postfija){
-            System.out.println(token);
+            //System.out.println(token);
             /*try{
                 if(token.tipo.equals(t.id) && token.literal == null){
                 ts.existeIdentificador(token.literal.toString());
@@ -97,10 +101,11 @@ public class Compilador {
             
             
         }
-        System.out.println("---------------------------------------");
+        //System.out.println("---------------------------------------");
         
-        GeneradorAST gast = new GeneradorAST(postfija/*, valores*/);
+        GeneradorAST gast = new GeneradorAST(postfija, valores);
         Arbol programa = gast.generarAST();
+        valores = gast.obtval();
         programa.recorrer();
     }
 

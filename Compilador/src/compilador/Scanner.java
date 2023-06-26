@@ -148,14 +148,20 @@ public class Scanner {
                         if(flag && c<k){
                             //Es una variable con numero
                             prov = "";
-                            for(j=0;j<k;j++){
-                                prov = String.valueOf(lect.charAt(i-j)) + prov;
+                            if(String.valueOf(lect.charAt(i-k)).equals("\"") || String.valueOf(lect.charAt(i)).equals("\"")){
+                                for(j=0;j<k;j++){
+                                    prov = String.valueOf(lect.charAt(i-j)) + prov;
+                                }
+                                tokens.add(new Token(TipoToken.str, "STR", prov , line));
+                            }else{
+                                for(j=0;j<k;j++){
+                                    prov = String.valueOf(lect.charAt(i-j)) + prov;
+                                }
+                                line++;
+                                tokens.add(new Token(TipoToken.ide, "IDE", prov, line));
                             }
-                            line++;
-                            tokens.add(new Token(TipoToken.ide, "IDE", prov, line));
-                            
                         }else if(flag && c==k && !pflag){
-                            System.out.println(String.valueOf(lect.charAt(i-1))); //Arreglar esto que lo captura en -1
+                            //System.out.println(String.valueOf(lect.charAt(i-1))); //Arreglar esto que lo captura en -1
                             
                             /*if(String.valueOf(lect.charAt(i-1)).equals(".") && c==1 && k==1 && Validar.validarNum(String.valueOf(lect.charAt(i+1)))){
                                 tokens.add(new Token(TipoToken.punto, ".", null, line));
@@ -169,7 +175,7 @@ public class Scanner {
                             tokens.add(new Token(TipoToken.num, "NUM", prov, line));
                             //}
                         }else if(flag && c==k && pflag){
-                            System.out.println(String.valueOf(lect.charAt(i-1))); //Arreglar esto que lo captura en -1
+                            //System.out.println(String.valueOf(lect.charAt(i-1))); //Arreglar esto que lo captura en -1
                             
                             prov="";
                             for(j=0;j<c;j++){
@@ -268,7 +274,7 @@ public class Scanner {
                             
                                     if(!flag && i>k){
                                         
-                                        if(String.valueOf(lect.charAt(i-k)).equals("=")){
+                                        if(String.valueOf(lect.charAt(i-k)).equals("\"") && String.valueOf(lect.charAt(i+1)).equals("\"")){
                                             tokens.add(new Token(TipoToken.str, "STR", prov , line));
                                         }else{
                                             tokens.add(new Token(TipoToken.ide, "IDE", prov, line));
@@ -436,7 +442,7 @@ public class Scanner {
         
         
         tokens.add(new Token(TipoToken.EOF, "EOF", null, linea));
-
+        //System.out.println("aqio");
         return tokens;
     }
     

@@ -55,6 +55,7 @@ public class Token {
         switch (this.tipo){
             case ide:
             case num:
+            case str:
                 return true;
             default:
                 return false;
