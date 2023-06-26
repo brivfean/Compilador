@@ -18,7 +18,7 @@ public class GeneradorAST {
     private final Stack<Nodo> pila;
     private boolean vflag = false, rflag = false, iflag = false, oflag = false, aflag = false;
     private String iden;
-    private Object val;
+    private Object val = null;
     private int idv = 0;
     
     TablaSimbolos ts = new TablaSimbolos();
@@ -62,20 +62,25 @@ public class GeneradorAST {
 
                     pilaPadres.push(n);
                     padre = n;
-                    System.out.println("Entro");
+                    //System.out.println("Entro");
+                    if(t.tipo == TipoToken.num && idv==1){
+                        throw new RuntimeException("Numero no puede asignarse valor '" + t.lexema + "'.");
+                    }
                     if(ts.existeIdentificador(t.lexema)){
                         throw new RuntimeException("Redefinicion de variable '" + t.lexema + "'.");
                     }
                     vflag = true;
                 }else{
+                    
                     if(ts.existeIdentificador(t.lexema)){
                         throw new RuntimeException("Redefinicion de variable '" + t.lexema + "'.");
                     }
                     if(idv==1){
                         iden = t.literal.toString();
+                        System.out.println(iden);
                     }
                     pila.push(n);
-                    System.out.println("Paso");
+                    //System.out.println("Paso");
                 }
                 
             }
@@ -92,7 +97,7 @@ public class GeneradorAST {
             else if(t.tipo == TipoToken.puntocoma){
 
                 vflag = false;
-                idv = 0;
+                
                 
                 if (pila.isEmpty()){
                     /*
@@ -110,26 +115,45 @@ public class GeneradorAST {
                         En el caso del VAR, es necesario eliminar el igual que
                         pudiera aparecer en la raíz del nodo n.
                          */
-                        if(n.getValue().tipo == TipoToken.igual){
+                        if(n.getValue().tipo == TipoToken.asignar){
                             padre.insertarHijos(n.getHijos());
                             
-                            SolverAritmetico sa = new SolverAritmetico(n);
-                        
-                            val = sa.resolver();
                             
                         }
                         else{
                             padre.insertarSiguienteHijo(n);
                             
-                            val = null;
+                            if(idv>2){
+                                /*System.out.println("++++++++++++++++++++++++++++++++++++");
+                                SolverAritmetico sa = new SolverAritmetico(n);
+                                System.out.println(val + "      -----------------------");
+                                val = sa.resolver();
+                                System.out.println(val);
+                                ts.asignar(iden, val);*/
+                            }else if(idv == 1){
+                                val = null;
+                                ts.asignar(iden, val);
+                            }else{
+                                if(n.getValue().tipo == TipoToken.ide){
+                                    if(ts.existeIdentificador(t.lexema)){
+                                        throw new RuntimeException("Redefinicion de variable '" + t.lexema + "'.");
+                                    }else{
+                                        val = ts.obtener(n.getValue().literal.toString());
+                                        ts.asignar(iden, val);
+                                    }
+                                }else{
+                                    val = n.getValue().literal;
+                                    ts.asignar(iden, val);
+                                }
+                                
+                            }
+                            
                         }
                         
+                        System.out.println(iden + " -> " + val);
                         
-                        
-                        
-                        System.out.println(iden + " " + val);
-                        
-                        ts.asignar(iden, val);
+                        val = null;
+                        //ts.asignar(iden, val);
                         //ts.obtener(iden);
                         
                         pilaPadres.pop();
@@ -143,6 +167,7 @@ public class GeneradorAST {
                     else {
                         padre.insertarSiguienteHijo(n);
                     }
+                    idv = 0;
                 }
             }
         }
