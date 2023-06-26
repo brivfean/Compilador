@@ -10,6 +10,7 @@ package compilador;
  * @author bruni
  */
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 public class GeneradorAST {
@@ -22,10 +23,20 @@ public class GeneradorAST {
     private int idv = 0;
     
     TablaSimbolos ts = new TablaSimbolos();
+    //Map<String, Object> valores;
     
-    public GeneradorAST(List<Token> postfija){
+    public Object ManTS(Object aid){
+        if(!ts.existeIdentificador(aid.toString())){
+            throw new RuntimeException("Variable '" + aid + "' no se encuantra declarada.");
+        }
+        ts.obtener(aid.toString());
+        return aid;
+    }
+    
+    public GeneradorAST(List<Token> postfija/*, Map<String, Object> valores*/){
         this.postfija = postfija;
         this.pila = new Stack<>();
+        //this.valores = valores;
     }
 
     public Arbol generarAST() {
@@ -77,7 +88,7 @@ public class GeneradorAST {
                     }
                     if(idv==1){
                         iden = t.literal.toString();
-                        System.out.println(iden);
+                        //System.out.println(iden);
                     }
                     pila.push(n);
                     //System.out.println("Paso");
@@ -111,29 +122,30 @@ public class GeneradorAST {
                     Nodo n = pila.pop();
 
                     if(padre.getValue().tipo == TipoToken.var){ //-----------------------------------------------
-                        /*
-                        En el caso del VAR, es necesario eliminar el igual que
-                        pudiera aparecer en la raíz del nodo n.
-                         */
-                        if(n.getValue().tipo == TipoToken.asignar){
+                        
+                        /*if(n.getValue().tipo == TipoToken.asignar){
                             padre.insertarHijos(n.getHijos());
                             
                             
                         }
-                        else{
-                            padre.insertarSiguienteHijo(n);
+                        else{*/
+                            //padre.insertarSiguienteHijo(n);
                             
                             if(idv>2){
-                                /*System.out.println("++++++++++++++++++++++++++++++++++++");
-                                SolverAritmetico sa = new SolverAritmetico(n);
+                                padre.insertarHijos(n.getHijos());
+                                System.out.println("++++++++++++++++++++++++++++++++++++");
+                                System.out.println(padre);
+                                SolverAritmetico sa = new SolverAritmetico(n, ts.trasladar());
                                 System.out.println(val + "      -----------------------");
                                 val = sa.resolver();
                                 System.out.println(val);
-                                ts.asignar(iden, val);*/
+                                ts.asignar(iden, val);
                             }else if(idv == 1){
+                                padre.insertarSiguienteHijo(n);
                                 val = null;
                                 ts.asignar(iden, val);
                             }else{
+                                padre.insertarSiguienteHijo(n);
                                 if(n.getValue().tipo == TipoToken.ide){
                                     if(ts.existeIdentificador(t.lexema)){
                                         throw new RuntimeException("Redefinicion de variable '" + t.lexema + "'.");
@@ -148,18 +160,15 @@ public class GeneradorAST {
                                 
                             }
                             
-                        }
-                        
+                        //}
+                        ts.p();
                         System.out.println(iden + " -> " + val);
                         
                         val = null;
-                        //ts.asignar(iden, val);
-                        //ts.obtener(iden);
                         
                         pilaPadres.pop();
                         padre = pilaPadres.peek();
-                    }
-                    else if(padre.getValue().tipo == TipoToken.imprimir){
+                    }else if(padre.getValue().tipo == TipoToken.imprimir){
                         padre.insertarSiguienteHijo(n);
                         pilaPadres.pop();
                         padre = pilaPadres.peek();

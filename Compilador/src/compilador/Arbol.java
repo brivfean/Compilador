@@ -15,6 +15,9 @@ import java.util.List;
 
 public class Arbol {
     private final Nodo raiz;
+    
+    
+    TablaSimbolos ts = new TablaSimbolos();
 
     ArrayList<Object> variables = new ArrayList<Object>();
     
@@ -31,7 +34,7 @@ public class Arbol {
                 case menos:
                 case por:
                 case div:
-                    SolverAritmetico solver = new SolverAritmetico(n);
+                    SolverAritmetico solver = new SolverAritmetico(n, ts.trasladar());
                     Object res = solver.resolver();
                     System.out.println(res);
                 break;

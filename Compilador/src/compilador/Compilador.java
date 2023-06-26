@@ -13,6 +13,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -79,6 +80,8 @@ public class Compilador {
         
         TablaSimbolos ts = new TablaSimbolos();
         
+        Map<String, Object> valores =ts.trasladar();
+        
         System.out.println("---------------------------------------");
         for(Token token : postfija){
             System.out.println(token);
@@ -96,7 +99,7 @@ public class Compilador {
         }
         System.out.println("---------------------------------------");
         
-        GeneradorAST gast = new GeneradorAST(postfija);
+        GeneradorAST gast = new GeneradorAST(postfija/*, valores*/);
         Arbol programa = gast.generarAST();
         programa.recorrer();
     }

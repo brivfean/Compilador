@@ -21,6 +21,7 @@ public class TablaSimbolos {
     }
 
     Object obtener(String identificador) {
+        
         if (values.containsKey(identificador)) {
             return values.get(identificador);
         }
@@ -29,6 +30,14 @@ public class TablaSimbolos {
 
     void asignar(String identificador, Object valor){
         values.put(identificador, valor);
+    }
+    
+    void p(){
+        System.out.println(values);
+    }
+    
+    public Map<String, Object> trasladar() {
+         return values;
     }
 
 

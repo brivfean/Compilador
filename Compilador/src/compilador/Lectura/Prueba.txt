@@ -1,7 +1,11 @@
 
-var a = 0;
+var a = 1;
+var hola = 2;
 a = a+2;
-var b = a;
+var b = a / 10;
+var n = hola;
+var s = adios;
+var g = s + n;
 print(b);
 
 
