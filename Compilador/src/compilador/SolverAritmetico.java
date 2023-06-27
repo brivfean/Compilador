@@ -23,13 +23,17 @@ public class SolverAritmetico {
     private int ver = 0;
     Nodo izq;
     Nodo der;
+    Nodo tre;
     Object resultadoIzquierdo;
     Object resultadoDerecho;
-    boolean nflag = false, sflag = false;
+    Object resultadoTre;
+    boolean nflag = false, sflag = false, bflag;
+    double prv = 0;
     
     public SolverAritmetico(Nodo nodo, Map<String, Object> values) {
         this.nodo = nodo;
         this.values = values;
+        //System.out.println(nodo.getValue());
     }
 
     public Object resolver(){
@@ -60,10 +64,13 @@ public class SolverAritmetico {
                 // Ver la tabla de símbolos
                 //System.out.println("3");
                 //System.out.println(n.getValue().literal.toString() + " " + ts.existeIdentificador(n.getValue().literal.toString()));
-                //System.out.println(values);
-                if(!values.containsKey(n.getValue().literal.toString())){
-                    throw new RuntimeException("Variable '" + n.getValue().literal + "' no se encuantra declarada.");
+                System.out.println(values);
+                if(n.getValue().tipo == TipoToken.str && n.getValue().tipo == TipoToken.num){
+                    if(!values.containsKey(n.getValue().literal.toString())){
+                        throw new RuntimeException("Variable '" + n.getValue().literal + "' no se encuantra declarada.");
+                    }
                 }
+                
                 //System.out.println("4");
                 try{
                     Double.parseDouble(values.get(n.getValue().literal.toString()).toString());
@@ -73,20 +80,54 @@ public class SolverAritmetico {
                     nflag = false;
                     sflag = true;
                 }
-                return values.get(n.getValue().literal.toString());
+                try{
+                    return values.get(n.getValue().literal.toString());
+                }catch(Exception e){
+                    return n.getValue().lexema;
+                }
+                
+                
+                
             }
         }
         // Por simplicidad se asume que la lista de hijos del nodo tiene dos elementos
         if(ver==0){
             izq = n.getHijos().get(0);
+            //System.out.println(izq.getValue().lexema + "-------------");
             der = n.getHijos().get(1);
+            //System.out.println(der.getValue().lexema + "-------------");
+            try{
+                tre = n.getHijos().get(2);
+            }catch(Exception e){
+                tre = null;
+            }
             ver++;
             //System.out.println("5");
-            resultadoIzquierdo = resolver(izq);
+            if(n.getValue().tipo == TipoToken.str && n.getValue().tipo == TipoToken.str){
+                resultadoIzquierdo = resolver(izq);
+            }else{
+                resultadoIzquierdo = n.getValue().lexema;
+            }
+            
         }
         if(ver==1){
             //System.out.println("10");
-            resultadoDerecho = resolver(der);
+            if(n.getValue().tipo == TipoToken.str && n.getValue().tipo == TipoToken.str){
+                resultadoDerecho = resolver(der);
+            }else{
+                resultadoDerecho = n.getValue().lexema;
+            }
+            
+        }else if(ver==2){
+            try{
+                if(n.getValue().tipo == TipoToken.str && n.getValue().tipo == TipoToken.str){
+                    resultadoTre = resolver(der);
+                }else{
+                    resultadoTre = n.getValue().lexema;
+                }
+            }catch(Exception e){
+                prov = "";
+            }
         }
         
 
@@ -100,21 +141,85 @@ public class SolverAritmetico {
         
         if(/*resultadoIzquierdo instanceof Double && resultadoDerecho instanceof Double*/nflag){
             //System.out.println("avr");
+            
             switch (n.getValue().tipo){
                 case mas:
-                    return (/*(Double)*/Double.valueOf(resultadoIzquierdo.toString()) + Double.valueOf(resultadoDerecho.toString()));
+                    if(prov.equals("")){
+                        prv = (Double.valueOf(resultadoIzquierdo.toString()) + Double.valueOf(resultadoDerecho.toString()));
+                        switch (n.getValue().tipo){
+                            case mas:
+                                return (Double.valueOf(resultadoTre.toString()) + prv);
+                            case menos:
+                                return (Double.valueOf(resultadoTre.toString()) - prv);
+                            case por:
+                                return (Double.valueOf(resultadoTre.toString()) * prv);
+                            case div:
+                                return (Double.valueOf(resultadoTre.toString()) / prv);
+                        }
+                    }else{
+                        return (Double.valueOf(resultadoIzquierdo.toString()) + Double.valueOf(resultadoDerecho.toString()));
+                    }
                 case menos:
-                    return (Double.valueOf(resultadoIzquierdo.toString()) - Double.valueOf(resultadoDerecho.toString()));
+                    if(prov.equals("")){
+                        prv = (Double.valueOf(resultadoIzquierdo.toString()) - Double.valueOf(resultadoDerecho.toString()));
+                        switch (n.getValue().tipo){
+                            case mas:
+                                return (Double.valueOf(resultadoTre.toString()) + prv);
+                            case menos:
+                                return (Double.valueOf(resultadoTre.toString()) - prv);
+                            case por:
+                                return (Double.valueOf(resultadoTre.toString()) * prv);
+                            case div:
+                                return (Double.valueOf(resultadoTre.toString()) / prv);
+                        }
+                    }else{
+                        return (Double.valueOf(resultadoIzquierdo.toString()) + Double.valueOf(resultadoDerecho.toString()));
+                    }
                 case por:
-                    return (Double.valueOf(resultadoIzquierdo.toString()) * Double.valueOf(resultadoDerecho.toString()));
+                    if(prov.equals("")){
+                        prv = (Double.valueOf(resultadoIzquierdo.toString()) * Double.valueOf(resultadoDerecho.toString()));
+                        switch (n.getValue().tipo){
+                            case mas:
+                                return (Double.valueOf(resultadoTre.toString()) + prv);
+                            case menos:
+                                return (Double.valueOf(resultadoTre.toString()) - prv);
+                            case por:
+                                return (Double.valueOf(resultadoTre.toString()) * prv);
+                            case div:
+                                return (Double.valueOf(resultadoTre.toString()) / prv);
+                        }
+                    }else{
+                        return (Double.valueOf(resultadoIzquierdo.toString()) + Double.valueOf(resultadoDerecho.toString()));
+                    }
                 case div:
-                    return (Double.valueOf(resultadoIzquierdo.toString()) / Double.valueOf(resultadoDerecho.toString()));
+                    if(prov.equals("")){
+                        prv = (Double.valueOf(resultadoIzquierdo.toString()) / Double.valueOf(resultadoDerecho.toString()));
+                        switch (n.getValue().tipo){
+                            case mas:
+                                return (Double.valueOf(resultadoTre.toString()) + prv);
+                            case menos:
+                                return (Double.valueOf(resultadoTre.toString()) - prv);
+                            case por:
+                                return (Double.valueOf(resultadoTre.toString()) * prv);
+                            case div:
+                                return (Double.valueOf(resultadoTre.toString()) / prv);
+                        }
+                    }else{
+                        return (Double.valueOf(resultadoIzquierdo.toString()) + Double.valueOf(resultadoDerecho.toString()));
+                    }
             }
         }
         else if(/*resultadoIzquierdo instanceof String && resultadoDerecho instanceof String*/sflag){
             if (n.getValue().tipo == TipoToken.mas){
                 // Ejecutar la concatenación
-                return resultadoIzquierdo.toString() + resultadoDerecho.toString();
+                try{
+                    return resultadoIzquierdo.toString() + resultadoDerecho.toString() + resultadoTre.toString();
+                }catch(Exception e){
+                    System.out.println(values);
+                    System.out.println(resultadoDerecho.toString());
+                    return resultadoIzquierdo.toString() + resultadoDerecho.toString();
+                }
+                
             }
         }
         else{

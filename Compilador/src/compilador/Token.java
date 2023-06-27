@@ -56,6 +56,8 @@ public class Token {
             case ide:
             case num:
             case str:
+            case verdad:
+            case falso:
                 return true;
             default:
                 return false;

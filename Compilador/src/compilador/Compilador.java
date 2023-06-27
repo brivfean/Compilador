@@ -72,7 +72,7 @@ public class Compilador {
         List<compilador.Token> tokens = scanner.scanTokens();
 
         for(compilador.Token token : tokens){
-            //System.out.println(token);
+            System.out.println(token);
         }
         
         Parser parser = new Parser(tokens);
@@ -88,7 +88,7 @@ public class Compilador {
         
         //System.out.println("---------------------------------------");
         for(Token token : postfija){
-            //System.out.println(token);
+            System.out.println(token);
             /*try{
                 if(token.tipo.equals(t.id) && token.literal == null){
                 ts.existeIdentificador(token.literal.toString());
@@ -101,7 +101,7 @@ public class Compilador {
             
             
         }
-        //System.out.println("---------------------------------------");
+        System.out.println("---------------------------------------");
         
         GeneradorAST gast = new GeneradorAST(postfija, valores);
         Arbol programa = gast.generarAST();

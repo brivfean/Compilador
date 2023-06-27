@@ -75,6 +75,7 @@ public class Parser {
 
         if(!hayErrores && !preanalisis.equals(EOF)){
             System.out.println("Error en la posición " + preanalisis.linea + ". No se esperaba el token " + preanalisis.tipo);
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". No se esperaba el token " + preanalisis.tipo);
         }
         else if(!hayErrores && preanalisis.equals(EOF)){
             //System.out.println("Sintaxis válida");
@@ -165,6 +166,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba CLASS. CLASS_DECL");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba CLASS. CLASS_DECL");
         }
     }
     
@@ -204,6 +206,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba FUNCTION. FUN_DECL");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba FUNCTION. FUN_DECL");
         }
     }
     
@@ -220,6 +223,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba ID. FUNCT");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba ID. FUNCT");
         }
     }
     
@@ -245,6 +249,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba ID. PARAMETERS");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba ID. PARAMETERS");
         }
     }
     
@@ -274,6 +279,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba FUNCTION. VAR_DECL");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba FUNCTION. VAR_DECL");
         }
     }
     
@@ -320,6 +326,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba FOR, IF, PRINT, RETURN, WHILE, {, !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. STMT");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba FOR, IF, PRINT, RETURN, WHILE, {, !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. STMT");
         }
     }
     
@@ -334,6 +341,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba {. BLOCK");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba {. BLOCK");
         }
     }
     
@@ -384,6 +392,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba WHILE. WHILE_STMT");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba WHILE. WHILE_STMT");
         }
     }
     
@@ -398,6 +407,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba RETURN. RETURN_STMT");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba RETURN. RETURN_STMT");
         }
     }
     
@@ -434,6 +444,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba PRINT. PRINT_STMT");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba PRINT. PRINT_STMT");
         }
     }
     
@@ -451,6 +462,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba IF. IF_STMT");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba IF. IF_STMT");
         }
     }
     
@@ -482,6 +494,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba FOR. FOR_STMT");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba FOR. FOR_STMT");
         }
     }
     
@@ -529,6 +542,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba ! o ;. OR_STMT_2");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba ! o ;. OR_STMT_2");
         }
     }
     
@@ -555,6 +569,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba VARIABLE, ;, !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. FOR_STMT_1");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba VARIABLE, ;, !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. FOR_STMT_1");
         }
     }
     
@@ -578,6 +593,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. EXPR_STMT");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. EXPR_STMT");
         }
     }
     
@@ -600,6 +616,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. EXPR");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. EXPR");
         }
     }
     
@@ -623,6 +640,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. ASSI");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. ASSI");
         }
     }
     
@@ -659,6 +677,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. LOGIC_OR");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. LOGIC_OR");
         }
     }
     
@@ -696,6 +715,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. LOGIC_AND");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. LOGIC_AND");
         }
     }
     
@@ -733,6 +753,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. EQUALITY");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. EQUALITY");
         }
     }
     
@@ -774,6 +795,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. COMPARISON");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. TERM");
         }
     }
     
@@ -823,6 +845,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. TERM");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. TERM");
         }
     }
     
@@ -864,6 +887,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. FACTOR");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. FACTOR");
         }
     }
     
@@ -908,6 +932,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. UNARY");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. UNARY");
         }
     }
     
@@ -929,6 +954,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. CALL");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. CALL");
         }
     }
     
@@ -993,6 +1019,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. ARGUMENTS");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba !, -, TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. ARGUMENTS");
         }
     }
     
@@ -1060,6 +1087,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. PRIMARY");
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba TRUE, FALSE, NULL, THIS, NUMBER, STRING, ID, ( o SUPER. PRIMARY");
         }
     }
     
@@ -1089,7 +1117,7 @@ public class Parser {
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba un  " + t.tipo + " err: " + preanalisis.tipo);
-
+            throw new RuntimeException("Error en la posición " + preanalisis.linea + ". Se esperaba un  " + t.tipo + " err: " + preanalisis.tipo);
         }
     }
     

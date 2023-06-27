@@ -1,68 +1,35 @@
 
-var a = 1;
-var h = 2;
-a = a-2;
-var b = a / 10;
-var n = "hola";
-var s = "adios";
-var g = n + s;
-/*g = s + n;*/
-print(b);
-print(g);
+/*var nombre = "Gabriel";
+var apellido = "Rodriguez";
 
+print nombre + " " + apellido;
+*/
+/*
+var nombre = "Gabriel";
+var apellido = "Rodriguez";
+
+print nombre + " " + apellido +  edad;
+*/
+
+var radio = 5;
+var area = pi*radio *radio;
+
+print "El area es ";
+print area;
 
 /*
-if(a<123){
-    print a;
-}
+var radio = 5;
+var pi = "3.1416";
+var area = pi*radio *radio;
 
-for(var i=0; ;){
-    print i;
-
-    if (i>100){
-        return;
-    }
-}
-
-fun sumar(variable1, variable2){
-    return variabl1 + variable2;
-}
-
-class Perro < Animal {
-    ladrar(){
-        print "Guauuu";
-    }
-
-    comer(){
-        while(tanque < 100){
-            tanque = tanque + 1;
-        }
-    }
-}
-
-fun crearPerro(){
-    perro = Perro();
-    perror.ladrar();
-}
-
-crearPerro();
-
-var nombre = "Holamundo";
-fun presentarse(){
-    print nombre;
-}
+print "El area es ";
+print area;
 
 
-var fib = 0;
-var lim = 10;
-var aux = 1;
+var radio = 5;
+var pi = 3.1416;
+var area = pi*radio *radio;
 
-for(var init = 1; init <= lim; init = init + 1){
-    print fib;
-    aux = aux + fib;
-    fib = aux - fib;
-}
-
-D:\Repositorios\Compilador\Compilador\src\compilador\Lectura\Prueba.txt
-
+print "El area es ";
+print area;
 */

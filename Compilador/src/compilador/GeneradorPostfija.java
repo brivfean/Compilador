@@ -61,7 +61,10 @@ public class GeneradorPostfija {
                 if(pila.peek().tipo == TipoToken.par1){
                     pila.pop();
                 }
-                if(estructuraDeControl){
+
+                // Esta sección de aquí es para manejar el ")" que cierra la
+                // condición de la estructura de control
+                if(estructuraDeControl && infija.get(i + 1).tipo == TipoToken.cor1){
                     postfija.add(new Token(TipoToken.puntocoma, ";", null));
                 }
             }
@@ -101,7 +104,16 @@ public class GeneradorPostfija {
                     postfija.add(new Token(TipoToken.puntocoma, ";", null));
 
                     // Se extrae de la pila de estrucuras de control, el elemento en el tope
-                    pilaEstructurasDeControl.pop();
+                    Token aux = pilaEstructurasDeControl.pop();
+
+                    /*
+                        Si se da este caso, es necesario extraer el IF de la pila
+                        pilaEstructurasDeControl, y agregar los ";" correspondientes
+                     */
+                    if(aux.tipo == TipoToken.contra){
+                        pilaEstructurasDeControl.pop();
+                        postfija.add(new Token(TipoToken.puntocoma, ";", null));
+                    }
                     if(pilaEstructurasDeControl.isEmpty()){
                         estructuraDeControl = false;
                     }

@@ -20,7 +20,7 @@ public class Validaciones {
     }
     
     public boolean validarVar(String nom){
-		String reg = "[a-zA-Z0-9]*";
+		String reg = "[a-zA-Z0-9_\"]*";
 		if(nom.matches(reg)){
 			return true;
 		}else{
@@ -29,7 +29,7 @@ public class Validaciones {
     }
     
     public boolean validarNum(String nom){
-		String reg = "[0-9]*";
+		String reg = "[0-9.]*";
 		if(nom.matches(reg)){
 			return true;
 		}else{
